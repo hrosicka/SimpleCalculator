@@ -84,29 +84,69 @@ class MainWindow(QWidget):
         a = self.textbox1.text()
         b = self.textbox2.text()
 
-        try:
-            a = float(a)
-            b = float(b)
+        if operation != 'quot':
+            try:
+                a = float(a)
+                b = float(b)
 
-            if operation == 'sum':
-                res = a + b
+                self.textbox1.setStyleSheet("background-color : white; color : black")
+                self.textbox2.setStyleSheet("background-color : white; color : black")
 
-            elif operation == 'diff':
-                res = a - b
+                if operation == 'sum':
+                    res = a + b
+                    ope = ' + '
 
-            elif operation == 'prod':
-                res = a * b
+                elif operation == 'diff':
+                    res = a - b
+                    ope = ' - '
 
-            elif operation == 'quot':
-                res = a / b
+                elif operation == 'prod':
+                    res = a * b
+                    ope = ' * '
+    
+            except Exception:
+                self.textbox1.setStyleSheet("background-color : pink; color : black")
+                self.textbox2.setStyleSheet("background-color : pink; color : black")
+                QMessageBox.about(self, 'Error','Input can only be a number')
 
-        except Exception:
-            QMessageBox.about(self, 'Error','Input can only be a number')
+            else:
 
-        pass
+                self.label.setText(str(res))
+                self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n"
+                                            + self.history.toPlainText())
 
-        self.label.setText(str(res))
-        self.history.setText(self.history.toPlainText() + "\n" + str(res))
+        elif operation == 'quot':
+
+            try:
+                a = float(a)
+                b = float(b)
+
+                self.textbox1.setStyleSheet("background-color : white; color : black")
+                self.textbox2.setStyleSheet("background-color : white; color : black")
+
+            except Exception:
+                self.textbox1.setStyleSheet("background-color : pink; color : black")
+                self.textbox2.setStyleSheet("background-color : pink; color : black")
+                QMessageBox.about(self, 'Error','Input can only be a number')
+                    
+            else:
+
+                try:
+                    res = a / b
+                    ope = ' / '
+
+                    self.textbox1.setStyleSheet("background-color : white; color : black")
+                    self.textbox2.setStyleSheet("background-color : white; color : black")
+
+                except Exception:
+                    self.textbox2.setStyleSheet("background-color : pink; color : black")
+                    QMessageBox.about(self, 'Error','Cannot be divided by zero')
+
+                else:
+
+                    self.label.setText(str(res))
+                    self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n"
+                                            + self.history.toPlainText())
 
 
 if __name__ == '__main__':

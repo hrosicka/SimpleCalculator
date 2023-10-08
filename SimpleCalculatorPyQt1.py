@@ -1,6 +1,20 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QLabel, QVBoxLayout, QFormLayout, QTextEdit, QLineEdit, QMessageBox
-from PyQt5.QtGui import QFont, QDoubleValidator
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QPushButton,
+    QHBoxLayout,
+    QLabel,
+    QVBoxLayout,
+    QFormLayout,
+    QTextEdit,
+    QLineEdit,
+    QMessageBox
+    )
+from PyQt5.QtGui import (
+    QFont,
+    QDoubleValidator
+    )
 from PyQt5 import QtCore
 from PyQt5.QtCore import QLocale
 
@@ -44,10 +58,10 @@ class MainWindow(QWidget):
         self.textbox2.setAlignment(QtCore.Qt.AlignRight)
         layout.addRow('Number 2:', self.textbox2)
 
-        self.history = QTextEdit('0.0')
+        self.history = QTextEdit()
         layout.addRow('History:', self.history)
 
-        titles = ['Sum', 'Difference', 'Product', 'Quotient', 'Exit']
+        titles = ['Sum', 'Difference', 'Product', 'Quotient', 'History Clear', 'Exit']
         buttons = [QPushButton(title) for title in titles]
         for button in buttons:
             layout.addRow(button)
@@ -67,9 +81,13 @@ class MainWindow(QWidget):
         buttons[3].setStyleSheet("background-color : darkblue; color : white")
         buttons[3].clicked.connect(lambda: self.calculate('quot'))
 
-        buttons[4].setToolTip("Press button for closing app!!!")
+        buttons[4].setToolTip("Press button for clear history!!!")
         buttons[4].setStyleSheet("background-color : darkblue; color : white")
-        buttons[4].clicked.connect(app.exit)
+        buttons[4].clicked.connect(lambda: self.clear_history())
+
+        buttons[5].setToolTip("Press button for closing app!!!")
+        buttons[5].setStyleSheet("background-color : darkblue; color : white")
+        buttons[5].clicked.connect(app.exit)
 
         
         self.setStyleSheet('''QToolTip { 
@@ -79,6 +97,10 @@ class MainWindow(QWidget):
                            }''')
         
         self.show()
+
+    def clear_history(self):
+        self.history.clear()
+        
 
     def calculate(self, operation):
         a = self.textbox1.text()

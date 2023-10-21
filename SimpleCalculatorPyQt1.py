@@ -61,7 +61,8 @@ class MainWindow(QWidget):
         self.history = QTextEdit()
         layout.addRow('History:', self.history)
 
-        titles = ['Sum', 'Difference', 'Product', 'Quotient', 'History Clear', 'Exit']
+        titles = ['Sum', 'Difference', 'Product', 'Quotient', 'History Save', 'Input Clear',
+                  'History Clear', 'Exit']
         buttons = [QPushButton(title) for title in titles]
         for button in buttons:
             layout.addRow(button)
@@ -81,13 +82,21 @@ class MainWindow(QWidget):
         buttons[3].setStyleSheet("background-color : darkblue; color : white")
         buttons[3].clicked.connect(lambda: self.calculate('quot'))
 
-        buttons[4].setToolTip("Press button for clear history!!!")
+        buttons[4].setToolTip("Press button for save history as file!!!")
         buttons[4].setStyleSheet("background-color : darkblue; color : white")
-        buttons[4].clicked.connect(lambda: self.clear_history())
+        buttons[4].clicked.connect(lambda: self.save_history())
 
-        buttons[5].setToolTip("Press button for closing app!!!")
+        buttons[5].setToolTip("Press button for clear input!!!")
         buttons[5].setStyleSheet("background-color : darkblue; color : white")
-        buttons[5].clicked.connect(app.exit)
+        buttons[5].clicked.connect(lambda: self.clear_input())
+        
+        buttons[6].setToolTip("Press button for clear history!!!")
+        buttons[6].setStyleSheet("background-color : darkblue; color : white")
+        buttons[6].clicked.connect(lambda: self.clear_history())
+
+        buttons[7].setToolTip("Press button for closing app!!!")
+        buttons[7].setStyleSheet("background-color : darkblue; color : white")
+        buttons[7].clicked.connect(app.exit)
 
         
         self.setStyleSheet('''QToolTip { 
@@ -98,10 +107,19 @@ class MainWindow(QWidget):
         
         self.show()
 
-    def clear_history(self):
-        self.history.clear()
+    def save_history(self):
+        with open('history_calc.txt', mode='w', encoding='utf-8') as history_file:
+            print(self.history.toPlainText(), file=history_file)
         
 
+    def clear_history(self):
+        self.history.clear()
+
+    def clear_input(self):
+        self.label.setText('0.0')
+        self.textbox1.clear()
+        self.textbox2.clear()
+        
     def calculate(self, operation):
         a = self.textbox1.text()
         b = self.textbox2.text()

@@ -14,4 +14,8 @@ Simple calculator with history and saving resuls in PyQt
   
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/Tooltip.png)
 
+- Input can be only a number:
+  
+![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/InputError.PNG)
+
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)

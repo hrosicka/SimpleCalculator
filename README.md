@@ -12,6 +12,6 @@ Simple calculator with history and saving resuls in PyQt
 
 - Every button has tooltip:
   
-![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/Tooltip.PNG)
+![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/Tooltip.png)
 
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)

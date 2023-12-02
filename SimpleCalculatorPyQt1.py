@@ -10,17 +10,18 @@ from PyQt5.QtWidgets import (
     QFormLayout,
     QTextEdit,
     QLineEdit,
-    QMessageBox
+    QMessageBox,
     )
 from PyQt5.QtGui import (
     QFont,
     QDoubleValidator,
     QIcon,
+    QPixmap,
     )
 from PyQt5 import QtCore
-from PyQt5.QtCore import QLocale
+import PyQt5.QtCore
 
-locale = QLocale(QLocale.English, QLocale.UnitedStates)
+locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
 
 class MainWindow(QWidget):
@@ -34,7 +35,6 @@ class MainWindow(QWidget):
         layout = QFormLayout()
         self.setLayout(layout)
 
-
         self.label = QLabel('0.0')
         self.label.setFont(QFont('Arial', 14))
         self.label.setStyleSheet("background-color : white; color : darkblue")
@@ -44,7 +44,7 @@ class MainWindow(QWidget):
 
         validator = QDoubleValidator(-10000000,10000000,5)
 
-        locale = QLocale(QLocale.English, QLocale.UnitedStates)
+        locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
         validator.setLocale(locale)
         validator.setNotation(QDoubleValidator.StandardNotation)
@@ -160,9 +160,14 @@ class MainWindow(QWidget):
                     ope = ' * '
     
             except Exception:
+
                 self.textbox1.setStyleSheet("background-color : pink; color : black")
                 self.textbox2.setStyleSheet("background-color : pink; color : black")
-                QMessageBox.about(self, 'Error','Input can only be a number')
+                messagebox = QMessageBox(QMessageBox.Warning, "Error", "Input can only be a number!", buttons = QMessageBox.Ok, parent=self)
+                messagebox.setIconPixmap(QPixmap('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\stop_writing.png'))
+                messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
+                messagebox.exec_()
+
 
             else:
 

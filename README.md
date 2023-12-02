@@ -10,7 +10,8 @@ Simple calculator with history and saving resuls in PyQt
   
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/MainWindow2.PNG)
 
-
-![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/InputError.PNG)
+- Every button has tooltip:
+  
+![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/Tooltip.PNG)
 
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)

@@ -1,5 +1,11 @@
 # PyQtSimpleCalculator
 Simple calculator with history and saving resuls in PyQt
+### Functions
+- Operations:  + - * /
+- History view
+- History save
+- Input clear
+- History clear
 
 ### Enter inputs
 - Enter number 1:

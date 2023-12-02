@@ -14,7 +14,8 @@ from PyQt5.QtWidgets import (
     )
 from PyQt5.QtGui import (
     QFont,
-    QDoubleValidator
+    QDoubleValidator,
+    QIcon,
     )
 from PyQt5 import QtCore
 from PyQt5.QtCore import QLocale
@@ -27,6 +28,7 @@ class MainWindow(QWidget):
         super().__init__(*args, **kwargs)
 
         self.setWindowTitle('PyQt Calculator')
+        self.setWindowIcon(QIcon('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\calc_icon.png'))
 
         # create a layout
         layout = QFormLayout()

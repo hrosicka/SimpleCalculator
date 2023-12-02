@@ -3,7 +3,7 @@ Simple calculator with history and saving resuls in PyQt
 ### Functions
 - Operations:  + - * /
 - History view
-- History save
+- History save - create file history_calc.txt
 - Input clear
 - History clear
 

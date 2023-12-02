@@ -1,9 +1,11 @@
 # PyQtSimpleCalculator
 Simple calculator with history and saving resuls in PyQt
 ### Functions
-- Operations:  + - * /
+- Operations
+  - + - * /
 - History view
-- History save - create file history_calc.txt
+- History save
+  - create file history_calc.txt
 - Input clear
 - History clear
 

@@ -18,4 +18,8 @@ Simple calculator with history and saving resuls in PyQt
   
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/InputError.PNG)
 
+- Numbers can not be devided by zero:
+
+![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)
+
 

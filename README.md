@@ -2,7 +2,7 @@
 Simple calculator with history and saving resuls in PyQt
 ### Functions
 - Operations
-  - + - * /
+  - 4 basics: + - * /
 - History view
 - History save
   - create file history_calc.txt

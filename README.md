@@ -1,5 +1,5 @@
 # PyQtSimpleCalculator
-Simple calculator with history and saving resuls in PyQt
+Simple calculator with history and saving results in PyQt
 ### Functions
 - Operations
   - 4 basics: + - * /

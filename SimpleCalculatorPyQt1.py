@@ -22,6 +22,8 @@ from PyQt5.QtGui import (
 
 from PyQt5 import QtCore
 
+from Calculator import Calculator
+
 locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
 
@@ -36,6 +38,8 @@ class MainWindow(QWidget):
 
         self.setWindowTitle('PyQt Calculator')
         self.setWindowIcon(QIcon(calc_icon))
+
+        self.calculator = Calculator()
 
         # create a layout
         layout = QFormLayout()
@@ -151,15 +155,15 @@ class MainWindow(QWidget):
                 self.textbox2.setStyleSheet("background-color : white; color : black")
 
                 if operation == 'sum':
-                    res = a + b
+                    res = self.calculator.add(a, b)
                     ope = ' + '
 
                 elif operation == 'diff':
-                    res = a - b
+                    res = self.calculator.subtract(a, b)
                     ope = ' - '
 
                 elif operation == 'prod':
-                    res = a * b
+                    res = self.calculator.multiply(a, b)
                     ope = ' * '
     
             except Exception:
@@ -198,7 +202,7 @@ class MainWindow(QWidget):
             else:
 
                 try:
-                    res = a / b
+                    res = self.calculator.divide(a, b)
                     ope = ' / '
 
                     self.textbox1.setStyleSheet("background-color : white; color : black")

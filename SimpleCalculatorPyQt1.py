@@ -74,45 +74,40 @@ class MainWindow(QWidget):
         titles = ['Sum', 'Difference', 'Product', 'Quotient', 'History Save', 'Input Clear',
                   'History Clear', 'Exit']
         buttons = [QPushButton(title) for title in titles]
-        
 
+        # StyleSheets for buttons
+        for button in buttons:
+            button.setStyleSheet("background-color: darkblue; color: white")
+        
         buttons[0].setToolTip("<b>Sum = Number 1 + Number 2</b>")
-        buttons[0].setStyleSheet("background-color : darkblue; color : white;")
         buttons[0].clicked.connect(lambda: self.calculate('sum'))
         self.layout_button.addWidget(buttons[0],0,0)
 
         buttons[1].setToolTip("<b>Difference = Number 1 - Number 2</b>")
-        buttons[1].setStyleSheet("background-color : darkblue; color : white")
         buttons[1].clicked.connect(lambda: self.calculate('diff'))
         self.layout_button.addWidget(buttons[1],0,1)
 
         buttons[2].setToolTip("<b>Product = Number 1 * Number 2</b>")
-        buttons[2].setStyleSheet("background-color : darkblue; color : white")
         buttons[2].clicked.connect(lambda: self.calculate('prod'))
         self.layout_button.addWidget(buttons[2],1,0)
 
         buttons[3].setToolTip("<b>Quotient = Number 1 / Number 2</b>")
-        buttons[3].setStyleSheet("background-color : darkblue; color : white")
         buttons[3].clicked.connect(lambda: self.calculate('quot'))
         self.layout_button.addWidget(buttons[3],1,1)
 
         buttons[4].setToolTip("<b>Press button for save history as file: history_calc.txt</b>")
-        buttons[4].setStyleSheet("background-color : darkblue; color : white")
         buttons[4].clicked.connect(lambda: self.save_history())
         self.layout_button.addWidget(buttons[4],2,0)
 
         buttons[5].setToolTip("<b>Press button for clear input!</b>")
-        buttons[5].setStyleSheet("background-color : darkblue; color : white")
         buttons[5].clicked.connect(lambda: self.clear_input())
         self.layout_button.addWidget(buttons[5],2,1)
         
         buttons[6].setToolTip("<b>Press button for clear history!</b>")
-        buttons[6].setStyleSheet("background-color : darkblue; color : white")
         buttons[6].clicked.connect(lambda: self.clear_history())
         self.layout_button.addWidget(buttons[6],3,0)
 
         buttons[7].setToolTip("<b>Press button for closing app!</b>")
-        buttons[7].setStyleSheet("background-color : darkblue; color : white")
         buttons[7].clicked.connect(app.exit)
         self.layout_button.addWidget(buttons[7],3,1)
 

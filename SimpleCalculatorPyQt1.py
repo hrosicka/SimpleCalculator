@@ -1,4 +1,5 @@
 import sys
+import os
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -28,8 +29,13 @@ class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # relative paths
+        dirname = os.path.dirname(__file__)
+        calc_icon = os.path.join(dirname, 'calc_icon.png')
+        stop_writing = os.path.join(dirname, 'stop_writing.png')
+
         self.setWindowTitle('PyQt Calculator')
-        self.setWindowIcon(QIcon('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\calc_icon.png'))
+        self.setWindowIcon(QIcon(calc_icon))
 
         # create a layout
         layout = QFormLayout()
@@ -129,6 +135,10 @@ class MainWindow(QWidget):
         self.textbox2.clear()
         
     def calculate(self, operation):
+
+        dirname = os.path.dirname(__file__)
+        stop_writing = os.path.join(dirname, 'stop_writing.png')
+
         a = self.textbox1.text()
         b = self.textbox2.text()
 
@@ -157,7 +167,7 @@ class MainWindow(QWidget):
                 self.textbox1.setStyleSheet("background-color : pink; color : black")
                 self.textbox2.setStyleSheet("background-color : pink; color : black")
                 messagebox = QMessageBox(QMessageBox.Warning, "Error", "Input can only be a number!", buttons = QMessageBox.Ok, parent=self)
-                messagebox.setIconPixmap(QPixmap('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\stop_writing.png'))
+                messagebox.setIconPixmap(QPixmap(stop_writing))
                 messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
                 messagebox.exec_()
 
@@ -181,7 +191,7 @@ class MainWindow(QWidget):
                 self.textbox1.setStyleSheet("background-color : pink; color : black")
                 self.textbox2.setStyleSheet("background-color : pink; color : black")
                 messagebox = QMessageBox(QMessageBox.Warning, "Error", "Input can only be a number!", buttons = QMessageBox.Ok, parent=self)
-                messagebox.setIconPixmap(QPixmap('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\stop_writing.png'))
+                messagebox.setIconPixmap(QPixmap(stop_writing))
                 messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
                 messagebox.exec_()
                     
@@ -197,7 +207,7 @@ class MainWindow(QWidget):
                 except Exception:
                     self.textbox2.setStyleSheet("background-color : pink; color : black")
                     messagebox = QMessageBox(QMessageBox.Warning, "Error", "Cannot be divided by zero!", buttons = QMessageBox.Ok, parent=self)
-                    messagebox.setIconPixmap(QPixmap('D:\\Programovani\\Python\\naucse\\PyQtSimpleCalculator\\stop_writing.png'))
+                    messagebox.setIconPixmap(QPixmap(stop_writing))
                     messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
                     messagebox.exec_()
 

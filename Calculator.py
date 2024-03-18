@@ -63,7 +63,7 @@ class Calculator:
             float: The quotient of a and b.
         """
         if b == 0:
-            raise CalculatorError("Division by zero")
+            raise ZeroDivisionError("Division by zero")
         return a / b
     
 class CalculatorError(Exception):

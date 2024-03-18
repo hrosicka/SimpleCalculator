@@ -181,84 +181,44 @@ class MainWindow(QWidget):
         dirname = os.path.dirname(__file__)
         stop_writing = os.path.join(dirname, 'stop_writing.png')
 
-        a = self.textbox1.text()
-        b = self.textbox2.text()
-
-        if operation != 'quot':
-            try:
-                a = float(a)
-                b = float(b)
-
-                self.textbox1.setStyleSheet("background-color : white; color : black")
-                self.textbox2.setStyleSheet("background-color : white; color : black")
-
-                if operation == 'sum':
-                    res = self.calculator.add(a, b)
-                    ope = ' + '
-
-                elif operation == 'diff':
-                    res = self.calculator.subtract(a, b)
-                    ope = ' - '
-
-                elif operation == 'prod':
-                    res = self.calculator.multiply(a, b)
-                    ope = ' * '
-    
-            except Exception:
-
-                self.textbox1.setStyleSheet("background-color : pink; color : black")
-                self.textbox2.setStyleSheet("background-color : pink; color : black")
-                messagebox = QMessageBox(QMessageBox.Warning, "Error", "Input can only be a number!", buttons = QMessageBox.Ok, parent=self)
-                messagebox.setIconPixmap(QPixmap(stop_writing))
-                messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
-                messagebox.exec_()
-
-
+        try:
+            a = float(self.textbox1.text())
+            b = float(self.textbox2.text())
+            self.textbox1.setStyleSheet("background-color : white; color : black")
+            self.textbox2.setStyleSheet("background-color : white; color : black")
+        
+            if operation == 'sum':
+                res = self.calculator.add(a, b)
+                ope = ' + '
+            elif operation == 'diff':
+                res = self.calculator.subtract(a, b)
+                ope = ' - '
+            elif operation == 'prod':
+                res = self.calculator.multiply(a, b)
+                ope = ' * '
+            elif operation == 'quot':
+                res = self.calculator.divide(a, b)
+                ope = ' / '
             else:
+                raise ValueError("Invalid operation")  # Handle invalid operation
 
-                self.label.setText(str(res))
-                self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n"
-                                            + self.history.toPlainText())
+            self.label.setText(str(res))
+            self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n" + self.history.toPlainText())
 
-        elif operation == 'quot':
-
-            try:
-                a = float(a)
-                b = float(b)
-
-                self.textbox1.setStyleSheet("background-color : white; color : black")
-                self.textbox2.setStyleSheet("background-color : white; color : black")
-
-            except Exception:
-                self.textbox1.setStyleSheet("background-color : pink; color : black")
-                self.textbox2.setStyleSheet("background-color : pink; color : black")
-                messagebox = QMessageBox(QMessageBox.Warning, "Error", "Input can only be a number!", buttons = QMessageBox.Ok, parent=self)
-                messagebox.setIconPixmap(QPixmap(stop_writing))
-                messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
-                messagebox.exec_()
-                    
-            else:
-
-                try:
-                    res = self.calculator.divide(a, b)
-                    ope = ' / '
-
-                    self.textbox1.setStyleSheet("background-color : white; color : black")
-                    self.textbox2.setStyleSheet("background-color : white; color : black")
-
-                except Exception:
-                    self.textbox2.setStyleSheet("background-color : pink; color : black")
-                    messagebox = QMessageBox(QMessageBox.Warning, "Error", "Cannot be divided by zero!", buttons = QMessageBox.Ok, parent=self)
-                    messagebox.setIconPixmap(QPixmap(stop_writing))
-                    messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
-                    messagebox.exec_()
-
-                else:
-
-                    self.label.setText(str(res))
-                    self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n"
-                                            + self.history.toPlainText())
-
+        except ValueError:
+            self.textbox1.setStyleSheet("background-color : pink; color : black")
+            self.textbox2.setStyleSheet("background-color : pink; color : black")
+            messagebox = QMessageBox(QMessageBox.Information, "Error", "Input can only be a number!", buttons=QMessageBox.Ok, parent=self)
+            messagebox.setIconPixmap(QPixmap(stop_writing))
+            messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
+            messagebox.exec_()
+            
+        except ZeroDivisionError:
+            self.textbox2.setStyleSheet("background-color : pink; color : black")
+            messagebox = QMessageBox(QMessageBox.Warning, "Error", "Division by zero is not allowed!", buttons=QMessageBox.Ok, parent=self)
+            messagebox.setIconPixmap(QPixmap(stop_writing))
+            messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
+            messagebox.exec_()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

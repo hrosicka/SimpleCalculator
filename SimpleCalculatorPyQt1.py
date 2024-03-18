@@ -38,9 +38,8 @@ class MainWindow(QWidget):
         # relative paths
         dirname = os.path.dirname(__file__)
 
-        # Define paths for icons used in the application
+        # Define paths for icon used in the application
         calc_icon = os.path.join(dirname, 'calc_icon.png')
-        stop_writing = os.path.join(dirname, 'stop_writing.png')
 
         # Set window title and icon
         self.setWindowTitle('PyQt Calculator')

@@ -176,6 +176,16 @@ class MainWindow(QWidget):
         self.textbox2.clear()
         
     def calculate(self, operation):
+        """
+        Performs the calculation based on the operation and updates the display and history.
+
+        Args:
+            operation: The type of calculation to perform (e.g., "sum", "diff", "prod", "quot").
+
+        Raises:
+            ValueError: If no input is provided.
+            ZeroDivisionError: If division by zero is attempted.
+        """
 
         dirname = os.path.dirname(__file__)
         stop_writing = os.path.join(dirname, 'stop_writing.png')

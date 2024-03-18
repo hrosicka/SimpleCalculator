@@ -4,6 +4,7 @@ import os
 # PyQt5 imports for building the graphical user interface (GUI)
 from PyQt5.QtWidgets import (
     QApplication,
+    QFileDialog,
     QFormLayout,
     QGridLayout,
     QLabel,
@@ -146,9 +147,26 @@ class MainWindow(QWidget):
         self.show()
 
     def save_history(self):
-        with open('history_calc.txt', mode='w', encoding='utf-8') as history_file:
-            print(self.history.toPlainText(), file=history_file)
-        
+        """
+        Saves the calculator history to a text file with a dialog for selecting location and name.
+        """
+
+        # Get the selected file path
+        # This line opens a dialog for the user to choose a file for saving.
+        # The return value is a tuple containing the chosen file path.
+        filepath, _ = QFileDialog.getSaveFileName(self, 'Save File')
+
+        # Check if the user selected a file (file path is not empty)
+        if filepath:
+            # Open the file in write mode with UTF-8 encoding
+            with open(filepath, mode='w', encoding='utf-8') as history_file:
+                print(self.history.toPlainText(), file=history_file)
+
+            # Show a success message box
+            messagebox = QMessageBox(QMessageBox.Information, "Save History", "History successfully saved to file: " + filepath, buttons=QMessageBox.Ok, parent=self)
+            messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
+            messagebox.exec_()
+
 
     def clear_history(self):
         self.history.clear()

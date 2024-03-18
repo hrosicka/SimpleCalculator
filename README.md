@@ -34,4 +34,15 @@ Simple calculator with history and saving results in PyQt
 ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ResultsAndHistory.PNG)
 
 
+## Unit tests
+### Class TestCalculator
+Class TestCalculator contains unit tests for the Calculator class.
+
+These tests verify the functionality of the calculator's basic arithmetic operations (addition, subtraction, multiplication, and division) for various inputs, including:
+- Positive and negative numbers
+- Mixed combinations of positive and negative numbers
+- Zero values
+- Limit cases with very large or very small numbers
+The tests also ensure that division by zero raises a CalculatorError.
+
 

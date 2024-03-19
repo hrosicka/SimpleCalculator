@@ -26,8 +26,10 @@ The main window consists of several sections:
    ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/MainWindow2.PNG)
 5. Click the button corresponding to the desired operation (Sum, Difference, Product, or Quotient).
 6. The result of the calculation will be displayed in the display area.
-7. The calculation will be added to the history box along with the formula used (e.g., "5 + 3 = 8").
-8. You can perform multiple calculations and view their history.
+   
+   ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ResultsAndHistory.PNG)
+8. The calculation will be added to the history box along with the formula used (e.g., "5 + 3 = 8").
+9. You can perform multiple calculations and view their history.
 
 ## Saving History
 1. Click the "History Save" button.
@@ -40,32 +42,16 @@ The main window consists of several sections:
 
 ## Error Handling
 - The application performs basic input validation. If you enter a non-numeric value in the input fields, an error message will be displayed, and the input fields will be highlighted in pink.
+  
+  ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/InputError.PNG)
 - Division by zero is not allowed. If you attempt to divide by zero, an error message will be displayed, and the Number 2 input field will be highlighted in pink.
+  
+  ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)
 
 ## Additional Notes
 - Tooltips are available for most buttons, providing a brief description of their functionality.
   ![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/Tooltip.png)
 - The application uses a dark blue color scheme for buttons and message boxes, enhancing readability.
-
-
-  
-
-
-
-  
-
-
-- Input can be only a number:
-  
-![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/InputError.PNG)
-
-- Numbers can not be devided by zero:
-
-![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ErrorDividedByZero.PNG)
-
-### Results
-![](https://github.com/hrosicka/PyQtSimpleCalculator/blob/master/doc/ResultsAndHistory.PNG)
-
 
 ## Unit tests
 ### Class TestCalculator

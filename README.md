@@ -1,5 +1,12 @@
 # PyQtSimpleCalculator
-This user manual provides instructions on how to use the PyQt Calculator application.
+This user-friendly calculator lets you add, subtract, multiply, and divide with clear input fields and a comprehensive history.
+
+## Key Features:
+- **Simple Interface:** Effortless calculation with intuitive buttons and clear display.
+- **Error Handling:** Get notified of invalid input and division by zero attempts.
+- **Calculation History:** Track all your past calculations for easy reference.
+- **Save History (Optional):** Save your calculation history to a file for future use.
+
 ## Main Window
 The main window consists of several sections:
 - **Display:** This area shows the current result of the calculation.

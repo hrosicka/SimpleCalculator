@@ -1,4 +1,4 @@
-# SimpleCalculator
+# Simple Calculator
 This user-friendly calculator lets you add, subtract, multiply, and divide with clear input fields and a comprehensive history.
 
 ## Key Features:

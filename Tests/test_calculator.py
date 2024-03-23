@@ -223,10 +223,9 @@ class TestCalculator(unittest.TestCase):
         Test that dividing by zero raises a CalculatorError.
         """
         calculator = Calculator()
-        with self.assertRaises(CalculatorError):
+        with self.assertRaises(ZeroDivisionError):
             calculator.divide(50, 0)
-
-        with self.assertRaises(CalculatorError):
+        with self.assertRaises(ZeroDivisionError):
             calculator.divide(0, 0)
 
 

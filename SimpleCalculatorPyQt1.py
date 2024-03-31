@@ -153,7 +153,7 @@ class MainWindow(QWidget):
         # Get the selected file path
         # This line opens a dialog for the user to choose a file for saving.
         # The return value is a tuple containing the chosen file path.
-        filepath, _ = QFileDialog.getSaveFileName(self, 'Save File')
+        filepath, _ = QFileDialog.getSaveFileName(self, 'Save File', '', 'Text files (*.txt)')
 
         # Check if the user selected a file (file path is not empty)
         if filepath:

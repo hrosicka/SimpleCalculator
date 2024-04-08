@@ -42,6 +42,9 @@ The main window consists of several sections:
 1. Click the "History Save" button.
 2. A dialog box will appear, allowing you to choose a location and filename to save the history as a text file.
 3. Once you select a location and filename, the history will be saved to the chosen file.
+4. Checks if the history is empty and displays a message box if so.
+
+   ![](https://github.com/hrosicka/SimpleCalculator/blob/master/doc/ErrorEmptyHistory.png)
 
 ## Clearing Input and History
 - Click the "Input Clear" button to clear the values in both Number 1 and Number 2 input fields.

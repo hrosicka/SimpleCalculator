@@ -148,7 +148,18 @@ class MainWindow(QWidget):
     def save_history(self):
         """
         Saves the calculator history to a text file with a dialog for selecting location and name.
+
+        Checks if the history is empty and displays a message box if so.
         """
+
+        # Check if history is empty
+        if not self.history.toPlainText():
+            messagebox = QMessageBox(QMessageBox.Warning, "Save History",
+                                    "History is empty! Cannot save an empty file.",
+                                    buttons=QMessageBox.Ok, parent=self)
+            messagebox.findChild(QPushButton).setStyleSheet("background-color : darkblue; color : white")
+            messagebox.exec_()
+            return  # Early return to prevent further execution if history is empty
 
         # Get the selected file path
         # This line opens a dialog for the user to choose a file for saving.

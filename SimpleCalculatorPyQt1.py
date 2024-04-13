@@ -56,7 +56,8 @@ class MainWindow(QWidget):
         self.label.setStyleSheet("""background-color : white; 
                                  color: #0B132B; 
                                  border-radius: 10px; 
-                                 border: 2px solid #7F2982;
+                                 border: 1px solid #7F2982;
+                                 min-height: 40px;
                                  """)
 
         self.label.setAlignment(QtCore.Qt.AlignRight)
@@ -79,10 +80,11 @@ class MainWindow(QWidget):
         self.textbox1.setValidator(validator)
         self.textbox1.setAlignment(QtCore.Qt.AlignRight)
         self.textbox1.setStyleSheet("""background-color : white; 
-                                 color: #0B132B; 
-                                 border-radius: 10px; 
-                                 border: 2px solid #7F2982;
-                                 """)
+                                    color: #0B132B; 
+                                    border-radius: 10px; 
+                                    border: 1px solid #7F2982;
+                                    min-height: 40px;
+                                    """)
         self.layout.addRow('Number 1:', self.textbox1)
 
         self.textbox2 = QLineEdit(self)
@@ -91,19 +93,21 @@ class MainWindow(QWidget):
         self.textbox2.setValidator(validator)
         self.textbox2.setAlignment(QtCore.Qt.AlignRight)
         self.textbox2.setStyleSheet("""background-color : white; 
-                                 color: #0B132B; 
-                                 border-radius: 10px; 
-                                 border: 2px solid #7F2982;
-                                 """)
+                                    color: #0B132B; 
+                                    border-radius: 10px; 
+                                    border: 1px solid #7F2982;
+                                    min-height: 40px;
+                                    """)
         self.layout.addRow('Number 2:', self.textbox2)
 
         # Create a text box for displaying calculation history
         self.history = QTextEdit()
-        self.history.setStyleSheet("""background-color : white; 
-                                 color: #0B132B; 
-                                 border-radius: 10px; 
-                                 border: 2px solid #7F2982;
-                                 """)
+        self.history.setStyleSheet("""background-color : white;
+                                   color: #0B132B;
+                                   border-radius: 10px;
+                                   border: 1px solid #7F2982;
+                                   min-height: 40px;
+                                   """)
         self.layout.addRow('History:', self.history)
 
         # Create a grid layout for arranging buttons
@@ -216,7 +220,8 @@ class MainWindow(QWidget):
                                                                                 border-radius: 10px; 
                                                                                 padding: 10px 15px; 
                                                                                 margin-top: 0px; 
-                                                                                outline: 0px;}
+                                                                                outline: 0px;
+                                                                                min-width: 100px;}
                                                                                 QPushButton:hover {background-color: #7F2982 }
                                                                                 """)
             messagebox.exec_()
@@ -248,8 +253,18 @@ class MainWindow(QWidget):
         try:
             a = float(self.textbox1.text())
             b = float(self.textbox2.text())
-            self.textbox1.setStyleSheet("background-color : white; color : black")
-            self.textbox2.setStyleSheet("background-color : white; color : black")
+            self.textbox1.setStyleSheet("""background-color : white; 
+                                        color: #0B132B; 
+                                        border-radius: 10px; 
+                                        border: 1px solid #7F2982;
+                                        min-height: 40px;
+                                        """)
+            self.textbox2.setStyleSheet("""background-color : white; 
+                                        color: #0B132B; 
+                                        border-radius: 10px; 
+                                        border: 1px solid #7F2982;
+                                        min-height: 40px;
+                                        """)
         
             if operation == 'sum':
                 res = self.calculator.add(a, b)
@@ -270,8 +285,18 @@ class MainWindow(QWidget):
             self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n" + self.history.toPlainText())
 
         except ValueError:
-            self.textbox1.setStyleSheet("background-color : pink; color : black")
-            self.textbox2.setStyleSheet("background-color : pink; color : black")
+            self.textbox1.setStyleSheet("""background-color : white; 
+                                        color: #0B132B; 
+                                        border-radius: 10px; 
+                                        border: 4px solid #F7717D;
+                                        min-height: 40px;
+                                 """)
+            self.textbox2.setStyleSheet("""background-color : white; 
+                                        color: #0B132B; 
+                                        border-radius: 10px; 
+                                        border: 4px solid #F7717D;
+                                        min-height: 40px;
+                                        """)
             messagebox = QMessageBox(QMessageBox.Information, "Error", "Input can only be a number!", buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(stop_writing))
             messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
@@ -279,13 +304,19 @@ class MainWindow(QWidget):
                                                                                 border-radius: 10px; 
                                                                                 padding: 10px 15px; 
                                                                                 margin-top: 0px; 
-                                                                                outline: 0px;}
+                                                                                outline: 0px;
+                                                                                min-width: 100px;}
                                                                                 QPushButton:hover {background-color: #7F2982 }
                                                                                 """)
             messagebox.exec_()
             
         except ZeroDivisionError:
-            self.textbox2.setStyleSheet("background-color : pink; color : black")
+            self.textbox2.setStyleSheet("""background-color : #F7717D; 
+                                        color: #0B132B; 
+                                        border-radius: 10px; 
+                                        border: 1px solid #7F2982;
+                                        min-height: 40px;  
+                                 """)
             messagebox = QMessageBox(QMessageBox.Warning, "Error", "Division by zero is not allowed!", buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(stop_writing))
             messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
@@ -293,7 +324,8 @@ class MainWindow(QWidget):
                                                             border-radius: 10px; 
                                                             padding: 10px 15px; 
                                                             margin-top: 0px; 
-                                                            outline: 0px;}
+                                                            outline: 0px;
+                                                            min-width: 100px;}
                                                             QPushButton:hover {background-color: #7F2982 }
                                                             """)
             messagebox.exec_()

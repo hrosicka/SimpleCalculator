@@ -44,6 +44,12 @@ class MainWindow(QWidget):
         # Set window title and icon
         self.setWindowTitle('PyQt Calculator')
         self.setWindowIcon(QIcon(calc_icon))
+        self.setStyleSheet("""QWidget{background-color: #D8D6E6;}
+                            QToolTip { 
+                            border: 1px solid darkgrey;
+                            background-color: #0B132B;
+                            border-radius: 10px; 
+                            color: white; }""") 
 
         self.calculator = Calculator()
 
@@ -171,11 +177,6 @@ class MainWindow(QWidget):
         buttons[7].clicked.connect(app.exit)
         self.layout_button.addWidget(buttons[7],3,1)
 
-        self.setStyleSheet("""QToolTip { 
-                           border: 1px solid darkgrey;
-                           background-color: #0B132B;
-                           border-radius: 10px; 
-                           color: white; }""")
         self.show()
 
     def save_history(self):
@@ -184,12 +185,16 @@ class MainWindow(QWidget):
 
         Checks if the history is empty and displays a message box if so.
         """
+        dirname = os.path.dirname(__file__)
+        warning = os.path.join(dirname, 'warning.png')
+        info = os.path.join(dirname, 'info.png')
 
         # Check if history is empty
         if not self.history.toPlainText():
             messagebox = QMessageBox(QMessageBox.Warning, "Save History",
                                     "History is empty! Cannot save an empty file.",
                                     buttons=QMessageBox.Ok, parent=self)
+            messagebox.setIconPixmap(QPixmap(warning))
             messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
                                                                                     color: white; 
                                                                                     border-radius: 10px; 
@@ -215,6 +220,7 @@ class MainWindow(QWidget):
 
             # Show a success message box
             messagebox = QMessageBox(QMessageBox.Information, "Save History", "History successfully saved to file: " + filepath, buttons=QMessageBox.Ok, parent=self)
+            messagebox.setIconPixmap(QPixmap(info))
             messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
                                                                                 color: white; 
                                                                                 border-radius: 10px; 
@@ -311,11 +317,11 @@ class MainWindow(QWidget):
             messagebox.exec_()
             
         except ZeroDivisionError:
-            self.textbox2.setStyleSheet("""background-color : #F7717D; 
+            self.textbox2.setStyleSheet("""background-color : white; 
                                         color: #0B132B; 
                                         border-radius: 10px; 
-                                        border: 1px solid #7F2982;
-                                        min-height: 40px;  
+                                        border: 4px solid #F7717D;
+                                        min-height: 40px;
                                  """)
             messagebox = QMessageBox(QMessageBox.Warning, "Error", "Division by zero is not allowed!", buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(stop_writing))

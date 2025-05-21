@@ -1,4 +1,12 @@
 # Simple Calculator
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Language](https://img.shields.io/badge/language-Python-blue.svg)
+![GitHub stars](https://img.shields.io/github/stars/hrosicka/SimpleCalculator.svg?style=social&label=Star)
+![GitHub issues](https://img.shields.io/github/issues/hrosicka/SimpleCalculator)
+![Repo size](https://img.shields.io/github/repo-size/hrosicka/SimpleCalculator)
+![Last Commit](https://img.shields.io/github/last-commit/hrosicka/SimpleCalculator)
+
 This user-friendly calculator lets you add, subtract, multiply, and divide with clear input fields and a comprehensive history.
 
 ## Key Features:

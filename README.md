@@ -82,6 +82,10 @@ These tests verify the functionality of the calculator's basic arithmetic operat
 - Limit cases with very large or very small numbers
 The tests also ensure that division by zero raises a CalculatorError.
 
-[MIT LICENSE](https://github.com/hrosicka/SimpleCalculator?tab=MIT-1-ov-file#readme)
+## Author
 
+Lovingly crafted by [Hanka Robovska](https://github.com/hrosicka) 
 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details. Free to use, modify, and distribute as needed.

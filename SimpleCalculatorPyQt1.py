@@ -1,6 +1,6 @@
 import sys
 import os
-from config import COLORS, WINDOW_TITLE, DEFAULT_PRECISION, NUMBER_RANGE_MIN, NUMBER_RANGE_MAX, INITIAL_RESULT
+from config import COLORS, WINDOW_TITLE, DEFAULT_PRECISION, NUMBER_RANGE_MIN, NUMBER_RANGE_MAX, INITIAL_RESULT, MAX_HISTORY_SIZE
 
 # PyQt5 imports for building the graphical user interface (GUI)
 from PyQt5.QtWidgets import (
@@ -230,12 +230,12 @@ class MainWindow(QWidget):
         try:
             history_text = self.history.toPlainText()
             
-            # Check if history is not too large (limit to 10MB)
-            if len(history_text.encode('utf-8')) > 10 * 1024 * 1024:
+            # Check if history is not too large (limit to MAX_HISTORY_SIZE)
+            if len(history_text.encode('utf-8')) > MAX_HISTORY_SIZE:
                 self._show_message_box(
                     QMessageBox.Warning,
                     "Save History",
-                    "History is too large (>10MB)! Please clear some history before saving.",
+                    f"History is too large (> {MAX_HISTORY_SIZE // (1024 * 1024)}MB)! Please clear some history before saving.",
                     warning
                 )
                 return

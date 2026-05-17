@@ -1,5 +1,6 @@
 import sys
 import os
+from config import COLORS
 
 # PyQt5 imports for building the graphical user interface (GUI)
 from PyQt5.QtWidgets import (
@@ -33,14 +34,18 @@ locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
 class MainWindow(QWidget):
 
-    BUTTON_STYLE = """QPushButton {background-color: #0B132B; 
-                     color: white; 
-                     border-radius: 10px; 
-                     padding: 10px 15px; 
-                     margin-top: 0px; 
-                     outline: 0px;
-                     min-width: 100px;}
-                     QPushButton:hover {background-color: #7F2982 }"""
+    BUTTON_STYLE = f"""QPushButton {{
+        background-color: {COLORS["primary"]}; 
+        color: white; 
+        border-radius: 10px; 
+        padding: 10px 15px; 
+        margin-top: 0px; 
+        outline: 0px;
+        min-width: 100px;
+    }}
+    QPushButton:hover {{
+        background-color: {COLORS["accent"]}; 
+    }}"""
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,12 +59,12 @@ class MainWindow(QWidget):
         # Set window title and icon
         self.setWindowTitle('PyQt Calculator')
         self.setWindowIcon(QIcon(calc_icon))
-        self.setStyleSheet("""QWidget{background-color: #D8D6E6;}
-                            QToolTip { 
+        self.setStyleSheet(f"""QWidget{{background-color: {COLORS['background']};}}
+                            QToolTip {{ 
                             border: 1px solid darkgrey;
-                            background-color: #0B132B;
+                            background-color: {COLORS['primary']};
                             border-radius: 10px; 
-                            color: white; }""") 
+                            color: white; }}""")
 
         self.calculator = Calculator()
 
@@ -69,10 +74,10 @@ class MainWindow(QWidget):
 
         self.label = QLabel('0.0')
         self.label.setFont(QFont('Arial', 14))
-        self.label.setStyleSheet("""background-color : white; 
-                                 color: #0B132B; 
+        self.label.setStyleSheet(f"""background-color : white; 
+                                 color: {COLORS['text']}; 
                                  border-radius: 10px; 
-                                 border: 1px solid #7F2982;
+                                 border: 1px solid {COLORS['accent']};
                                  min-height: 40px;
                                  """)
 
@@ -95,10 +100,10 @@ class MainWindow(QWidget):
         self.textbox1.setFont(QFont('Arial', 12))
         self.textbox1.setValidator(validator)
         self.textbox1.setAlignment(QtCore.Qt.AlignRight)
-        self.textbox1.setStyleSheet("""background-color : white; 
-                                    color: #0B132B; 
+        self.textbox1.setStyleSheet(f"""background-color : white; 
+                                    color: {COLORS['text']}; 
                                     border-radius: 10px; 
-                                    border: 1px solid #7F2982;
+                                    border: 1px solid {COLORS['accent']};
                                     min-height: 40px;
                                     """)
         self.layout.addRow('Number 1:', self.textbox1)
@@ -108,20 +113,20 @@ class MainWindow(QWidget):
         self.textbox2.setFont(QFont('Arial', 12))
         self.textbox2.setValidator(validator)
         self.textbox2.setAlignment(QtCore.Qt.AlignRight)
-        self.textbox2.setStyleSheet("""background-color : white; 
-                                    color: #0B132B; 
+        self.textbox2.setStyleSheet(f"""background-color : white; 
+                                    color: {COLORS['text']}; 
                                     border-radius: 10px; 
-                                    border: 1px solid #7F2982;
+                                    border: 1px solid {COLORS['accent']};
                                     min-height: 40px;
                                     """)
         self.layout.addRow('Number 2:', self.textbox2)
 
         # Create a text box for displaying calculation history
         self.history = QTextEdit()
-        self.history.setStyleSheet("""background-color : white;
-                                   color: #0B132B;
+        self.history.setStyleSheet(f"""background-color : white;
+                                   color: {COLORS['text']};
                                    border-radius: 10px;
-                                   border: 1px solid #7F2982;
+                                   border: 1px solid {COLORS['accent']};
                                    min-height: 40px;
                                    """)
         self.layout.addRow('History:', self.history)
@@ -137,13 +142,17 @@ class MainWindow(QWidget):
 
         # Set stylesheet for buttons (background color and text color)
         for button in buttons:
-            button.setStyleSheet("""QPushButton {background-color: #0B132B; 
+            button.setStyleSheet(f"""QPushButton {{
+                                 background-color: {COLORS['primary']}; 
                                  color: white; 
                                  border-radius: 10px; 
                                  padding: 10px 15px; 
                                  margin-top: 0px; 
-                                 outline: 0px;}
-                                 QPushButton:hover {background-color: #7F2982 }
+                                 outline: 0px;
+                                 }}
+                                 QPushButton:hover {{
+                                 background-color: {COLORS['accent']};
+                                 }}
                                  """)
         
         # Set tooltips and functionality for each button:
@@ -253,16 +262,16 @@ class MainWindow(QWidget):
         try:
             a = float(self.textbox1.text())
             b = float(self.textbox2.text())
-            self.textbox1.setStyleSheet("""background-color : white; 
-                                        color: #0B132B; 
+            self.textbox1.setStyleSheet(f"""background-color : white; 
+                                        color: {COLORS['text']}; 
                                         border-radius: 10px; 
-                                        border: 1px solid #7F2982;
+                                        border: 1px solid {COLORS['accent']};
                                         min-height: 40px;
                                         """)
-            self.textbox2.setStyleSheet("""background-color : white; 
-                                        color: #0B132B; 
+            self.textbox2.setStyleSheet(f"""background-color : white; 
+                                        color: {COLORS['text']}; 
                                         border-radius: 10px; 
-                                        border: 1px solid #7F2982;
+                                        border: 1px solid {COLORS['accent']};
                                         min-height: 40px;
                                         """)
         
@@ -285,16 +294,16 @@ class MainWindow(QWidget):
             self.history.setText(str(a) + ope + str(b) + " = " + str(res) + "\n" + self.history.toPlainText())
 
         except ValueError:
-            self.textbox1.setStyleSheet("""background-color : white; 
-                                        color: #0B132B; 
+            self.textbox1.setStyleSheet(f"""background-color : white; 
+                                        color: {COLORS['text']}; 
                                         border-radius: 10px; 
-                                        border: 4px solid #F7717D;
+                                        border: 4px solid {COLORS['error']};
                                         min-height: 40px;
                                  """)
-            self.textbox2.setStyleSheet("""background-color : white; 
-                                        color: #0B132B; 
+            self.textbox2.setStyleSheet(f"""background-color : white; 
+                                        color: {COLORS['text']}; 
                                         border-radius: 10px; 
-                                        border: 4px solid #F7717D;
+                                        border: 4px solid {COLORS['error']};
                                         min-height: 40px;
                                         """)
             messagebox = QMessageBox(QMessageBox.Information, "Error", "Input can only be a number!", buttons=QMessageBox.Ok, parent=self)
@@ -304,9 +313,9 @@ class MainWindow(QWidget):
             
         except ZeroDivisionError:
             self.textbox2.setStyleSheet("""background-color : white; 
-                                        color: #0B132B; 
+                                        color: {COLORS['text']}; 
                                         border-radius: 10px; 
-                                        border: 4px solid #F7717D;
+                                        border: 4px solid {COLORS['error']};
                                         min-height: 40px;
                                  """)
             messagebox = QMessageBox(QMessageBox.Warning, "Error", "Division by zero is not allowed!", buttons=QMessageBox.Ok, parent=self)

@@ -32,6 +32,16 @@ locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
 
 class MainWindow(QWidget):
+
+    BUTTON_STYLE = """QPushButton {background-color: #0B132B; 
+                     color: white; 
+                     border-radius: 10px; 
+                     padding: 10px 15px; 
+                     margin-top: 0px; 
+                     outline: 0px;
+                     min-width: 100px;}
+                     QPushButton:hover {background-color: #7F2982 }"""
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -195,15 +205,7 @@ class MainWindow(QWidget):
                                     "History is empty! Cannot save an empty file.",
                                     buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(warning))
-            messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
-                                                                                    color: white; 
-                                                                                    border-radius: 10px; 
-                                                                                    padding: 10px 15px; 
-                                                                                    margin-top: 0px; 
-                                                                                    outline: 0px;
-                                                                                    min-width: 100px;}
-                                                                                    QPushButton:hover {background-color: #7F2982 }
-                                                                                    """)
+            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
             messagebox.exec_()
             return  # Early return to prevent further execution if history is empty
 
@@ -221,15 +223,7 @@ class MainWindow(QWidget):
             # Show a success message box
             messagebox = QMessageBox(QMessageBox.Information, "Save History", "History successfully saved to file: " + filepath, buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(info))
-            messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
-                                                                                color: white; 
-                                                                                border-radius: 10px; 
-                                                                                padding: 10px 15px; 
-                                                                                margin-top: 0px; 
-                                                                                outline: 0px;
-                                                                                min-width: 100px;}
-                                                                                QPushButton:hover {background-color: #7F2982 }
-                                                                                """)
+            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
             messagebox.exec_()
 
 
@@ -305,15 +299,7 @@ class MainWindow(QWidget):
                                         """)
             messagebox = QMessageBox(QMessageBox.Information, "Error", "Input can only be a number!", buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(stop_writing))
-            messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
-                                                                                color: white; 
-                                                                                border-radius: 10px; 
-                                                                                padding: 10px 15px; 
-                                                                                margin-top: 0px; 
-                                                                                outline: 0px;
-                                                                                min-width: 100px;}
-                                                                                QPushButton:hover {background-color: #7F2982 }
-                                                                                """)
+            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
             messagebox.exec_()
             
         except ZeroDivisionError:
@@ -325,15 +311,7 @@ class MainWindow(QWidget):
                                  """)
             messagebox = QMessageBox(QMessageBox.Warning, "Error", "Division by zero is not allowed!", buttons=QMessageBox.Ok, parent=self)
             messagebox.setIconPixmap(QPixmap(stop_writing))
-            messagebox.findChild(QPushButton).setStyleSheet("""QPushButton {background-color: #0B132B; 
-                                                            color: white; 
-                                                            border-radius: 10px; 
-                                                            padding: 10px 15px; 
-                                                            margin-top: 0px; 
-                                                            outline: 0px;
-                                                            min-width: 100px;}
-                                                            QPushButton:hover {background-color: #7F2982 }
-                                                            """)
+            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
             messagebox.exec_()
 
 if __name__ == '__main__':

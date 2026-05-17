@@ -1,6 +1,6 @@
 import sys
 import os
-from config import COLORS
+from config import COLORS, WINDOW_TITLE, DEFAULT_PRECISION, NUMBER_RANGE_MIN, NUMBER_RANGE_MAX, INITIAL_RESULT
 
 # PyQt5 imports for building the graphical user interface (GUI)
 from PyQt5.QtWidgets import (
@@ -57,7 +57,7 @@ class MainWindow(QWidget):
         calc_icon = os.path.join(dirname, 'calc_icon.png')
 
         # Set window title and icon
-        self.setWindowTitle('PyQt Calculator')
+        self.setWindowTitle(WINDOW_TITLE)
         self.setWindowIcon(QIcon(calc_icon))
         self.setStyleSheet(f"""QWidget{{background-color: {COLORS['background']};}}
                             QToolTip {{ 
@@ -72,7 +72,7 @@ class MainWindow(QWidget):
         self.layout = QFormLayout()
         self.setLayout(self.layout)
 
-        self.label = QLabel('0.0')
+        self.label = QLabel(INITIAL_RESULT)
         self.label.setFont(QFont('Arial', 14))
         self.label.setStyleSheet(f"""background-color : white; 
                                  color: {COLORS['text']}; 
@@ -86,7 +86,7 @@ class MainWindow(QWidget):
         self.layout.addRow('Result:', self.label)
 
         # Create a validator to restrict input to numbers within a range
-        validator = QDoubleValidator(-10000000,10000000,5)
+        validator = QDoubleValidator(NUMBER_RANGE_MIN, NUMBER_RANGE_MAX, DEFAULT_PRECISION)
 
         # Set the validator's locale and notation for proper formatting
         locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
@@ -240,7 +240,7 @@ class MainWindow(QWidget):
         self.history.clear()
 
     def clear_input(self):
-        self.label.setText('0.0')
+        self.label.setText(INITIAL_RESULT)
         self.textbox1.clear()
         self.textbox2.clear()
         

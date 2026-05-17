@@ -203,37 +203,110 @@ class MainWindow(QWidget):
         Saves the calculator history to a text file with a dialog for selecting location and name.
 
         Checks if the history is empty and displays a message box if so.
+        Handles file write errors, permissions, and encoding issues.
         """
         dirname = os.path.dirname(__file__)
         warning = os.path.join(dirname, 'warning.png')
         info = os.path.join(dirname, 'info.png')
+        error = os.path.join(dirname, 'stop_writing.png')
 
         # Check if history is empty
         if not self.history.toPlainText():
-            messagebox = QMessageBox(QMessageBox.Warning, "Save History",
-                                    "History is empty! Cannot save an empty file.",
-                                    buttons=QMessageBox.Ok, parent=self)
-            messagebox.setIconPixmap(QPixmap(warning))
-            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
-            messagebox.exec_()
-            return  # Early return to prevent further execution if history is empty
+            self._show_message_box(
+                QMessageBox.Warning,
+                "Save History",
+                "History is empty! Cannot save an empty file.",
+                warning
+            )
+            return
 
         # Get the selected file path
-        # This line opens a dialog for the user to choose a file for saving.
-        # The return value is a tuple containing the chosen file path.
         filepath, _ = QFileDialog.getSaveFileName(self, 'Save File', '', 'Text files (*.txt)')
 
         # Check if the user selected a file (file path is not empty)
-        if filepath:
-            # Open the file in write mode with UTF-8 encoding
-            with open(filepath, mode='w', encoding='utf-8') as history_file:
-                print(self.history.toPlainText(), file=history_file)
+        if not filepath:
+            return  # User cancelled the dialog
 
-            # Show a success message box
-            messagebox = QMessageBox(QMessageBox.Information, "Save History", "History successfully saved to file: " + filepath, buttons=QMessageBox.Ok, parent=self)
-            messagebox.setIconPixmap(QPixmap(info))
-            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
-            messagebox.exec_()
+        try:
+            history_text = self.history.toPlainText()
+            
+            # Check if history is not too large (limit to 10MB)
+            if len(history_text.encode('utf-8')) > 10 * 1024 * 1024:
+                self._show_message_box(
+                    QMessageBox.Warning,
+                    "Save History",
+                    "History is too large (>10MB)! Please clear some history before saving.",
+                    warning
+                )
+                return
+
+            # Try to write the file
+            with open(filepath, mode='w', encoding='utf-8') as history_file:
+                history_file.write(history_text)
+
+            # Show success message
+            self._show_message_box(
+                QMessageBox.Information,
+                "Save History",
+                f"History successfully saved to:\n{filepath}",
+                info
+            )
+
+        except PermissionError:
+            self._show_message_box(
+                QMessageBox.Critical,
+                "Save History - Error",
+                f"Permission denied! Cannot write to:\n{filepath}\n\nTry saving to a different location.",
+                error
+            )
+
+        except FileNotFoundError:
+            self._show_message_box(
+                QMessageBox.Critical,
+                "Save History - Error",
+                f"Path not found:\n{filepath}\n\nMake sure the directory exists.",
+                error
+            )
+
+        except OSError as e:
+            self._show_message_box(
+                QMessageBox.Critical,
+                "Save History - Error",
+                f"System error while saving:\n{str(e)}\n\nTry again later.",
+                error
+            )
+
+        except UnicodeEncodeError:
+            self._show_message_box(
+                QMessageBox.Critical,
+                "Save History - Error",
+                "Encoding error! Some characters cannot be saved.\n\nTry using a different filename.",
+                error
+            )
+
+        except Exception as e:
+            self._show_message_box(
+                QMessageBox.Critical,
+                "Save History - Error",
+                f"Unexpected error:\n{str(e)}\n\nPlease try again.",
+                error
+            )
+
+
+    def _show_message_box(self, message_type, title, message, icon_path):
+        """
+        Helper method to display styled message boxes.
+        
+        Args:
+            message_type: Type of message (QMessageBox.Warning, Information, Critical)
+            title: Title of the message box
+            message: Message text
+            icon_path: Path to the icon image
+        """
+        messagebox = QMessageBox(message_type, title, message, buttons=QMessageBox.Ok, parent=self)
+        messagebox.setIconPixmap(QPixmap(icon_path))
+        messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
+        messagebox.exec_()
 
 
     def clear_history(self):

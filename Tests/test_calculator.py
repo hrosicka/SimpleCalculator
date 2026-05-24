@@ -1,7 +1,8 @@
 import unittest
 import sys
-# setting path
-sys.path.append('../PyQtSimpleCalculator')
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from Calculator import Calculator, CalculatorError
 

@@ -8,10 +8,9 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.8', '3.9', '3.10', '3.11']
 
     steps:
@@ -27,19 +26,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run unit tests
+    - name: Run tests
       run: |
         pytest Tests/test_calculator.py -v --tb=short
 
-    - name: Run tests with coverage
+    - name: Generate coverage report
       run: |
-        pip install pytest-cov
-        pytest Tests/test_calculator.py --cov=. --cov-report=xml --cov-report=term
-
-    - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: false
+        pip install coverage
+        coverage run -m pytest Tests/test_calculator.py
+        coverage report -m

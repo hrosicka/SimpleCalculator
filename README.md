@@ -6,6 +6,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/hrosicka/SimpleCalculator)
 ![Repo size](https://img.shields.io/github/repo-size/hrosicka/SimpleCalculator)
 ![Last Commit](https://img.shields.io/github/last-commit/hrosicka/SimpleCalculator)
+![Tests](https://github.com/hrosicka/SimpleCalculator/actions/workflows/tests.yml/badge.svg)
 
 This user-friendly calculator lets you add, subtract, multiply, and divide with clear input fields and a comprehensive history.
 

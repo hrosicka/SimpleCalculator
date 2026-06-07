@@ -1,12 +1,17 @@
 # Simple Calculator
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Language](https://img.shields.io/badge/language-Python-blue.svg)
-![GitHub stars](https://img.shields.io/github/stars/hrosicka/SimpleCalculator.svg?style=social&label=Star)
-![GitHub issues](https://img.shields.io/github/issues/hrosicka/SimpleCalculator)
-![Repo size](https://img.shields.io/github/repo-size/hrosicka/SimpleCalculator)
-![Last Commit](https://img.shields.io/github/last-commit/hrosicka/SimpleCalculator)
-![Tests](https://github.com/hrosicka/SimpleCalculator/actions/workflows/tests.yml/badge.svg)
+<p align="center">
+  <a href="https://www.python.org"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/></a>
+  <a href="https://github.com/hrosicka/SimpleCalculator/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/hrosicka/SimpleCalculator/tests.yml?branch=master&style=for-the-badge&logo=github&label=Tests" alt="Tests Status"/></a>
+  <a href="https://github.com/hrosicka/SimpleCalculator/issues"><img src="https://img.shields.io/github/issues/hrosicka/SimpleCalculator?style=for-the-badge&logo=github&color=orange" alt="GitHub Issues"/></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/hrosicka/SimpleCalculator/stargazers"><img src="https://img.shields.io/github/stars/hrosicka/SimpleCalculator?style=for-the-badge&logo=github&color=ffee55&logoColor=white" alt="GitHub Stars"/></a>
+  <a href="https://github.com/hrosicka/SimpleCalculator/commits/master"><img src="https://img.shields.io/github/last-commit/hrosicka/SimpleCalculator?style=for-the-badge&logo=git&color=990000" alt="Last Commit"/></a>
+  <a href="https://github.com/hrosicka"><img src="https://img.shields.io/badge/Author-Hanka%20%F0%9F%91%A9%E2%80%8D%F0%9F%94%AC-deeppink?style=for-the-badge" alt="Author: Hanka"/></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/hrosicka/SimpleCalculator?style=for-the-badge&color=yellow" alt="GitHub License"/></a>
+</p>
 
 This user-friendly calculator lets you add, subtract, multiply, and divide with clear input fields and a comprehensive history.
 

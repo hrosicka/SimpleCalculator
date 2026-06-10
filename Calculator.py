@@ -1,8 +1,9 @@
 class Calculator:
     """
-    This class solves basic mathematical operations: 
+    This class solves basic mathematical operations:
     addition, subtraction, multiplication, and division.
     """
+
     def __init__(self):
         """
         This is the constructor for the Calculator class. It does not require any arguments.
@@ -65,6 +66,7 @@ class Calculator:
         if b == 0:
             raise ZeroDivisionError("Division by zero")
         return a / b
-    
+
+
 class CalculatorError(Exception):
     pass

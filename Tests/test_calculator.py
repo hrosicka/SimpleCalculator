@@ -23,7 +23,7 @@ class TestCalculator(unittest.TestCase):
     The tests also ensure that division by zero raises a CalculatorError.
     """
 
-    def test_add_positive(self):
+    def test_add_positive(self) -> None:
         """
         Test that the add method returns the sum of two positive numbers.
         """
@@ -31,7 +31,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(2.1, 2.5)
         self.assertEqual(result, 4.6)
 
-    def test_add_negative(self):
+    def test_add_negative(self) -> None:
         """
         Test that the add method returns the sum of two negative numbers.
         """
@@ -39,7 +39,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(-2.1, -2.5)
         self.assertEqual(result, -4.6)
 
-    def test_add_mixed(self):
+    def test_add_mixed(self) -> None:
         """
         Test that the add method returns the sum of a positive and a negative number.
         """
@@ -47,7 +47,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(2.1, -2.1)
         self.assertEqual(result, 0.0)
 
-    def test_add_zero(self):
+    def test_add_zero(self) -> None:
         """
         Test that adding zero to any number returns the original number.
         """
@@ -58,7 +58,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(50, 0)
         self.assertEqual(result, 50)
 
-    def test_add_large_numbers(self):
+    def test_add_large_numbers(self) -> None:
         """
         Test that adding very large numbers does not cause overflow.
         """
@@ -66,7 +66,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(1e100, 1)
         self.assertEqual(result, 1e100 + 1)
 
-    def test_add_small_numbers(self):
+    def test_add_small_numbers(self) -> None:
         """
         Test that adding very small numbers does not lose precision.
         """
@@ -74,7 +74,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.add(1e-100, 1e-100)
         self.assertEqual(result, 2e-100)
 
-    def test_subtract_positive(self):
+    def test_subtract_positive(self) -> None:
         """
         Test that the subtract method returns the difference of two positive numbers.
         """
@@ -82,7 +82,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(5, 3)
         self.assertEqual(result, 2)
 
-    def test_subtract_negative(self):
+    def test_subtract_negative(self) -> None:
         """
         Test that the subtract method returns the difference of two negative numbers.
         """
@@ -90,7 +90,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(-5, -3)
         self.assertEqual(result, -2)
 
-    def test_subtract_mixed(self):
+    def test_subtract_mixed(self) -> None:
         """
         Test that the subtract method returns the difference of a positive and a negative number.
         """
@@ -98,7 +98,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(111.111, -100)
         self.assertEqual(result, 211.111)
 
-    def test_subtract_zero(self):
+    def test_subtract_zero(self) -> None:
         """
         Test that subtracting zero from any number returns the original number.
         """
@@ -109,7 +109,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(0, 50)
         self.assertEqual(result, -50)
 
-    def test_subtract_large_numbers(self):
+    def test_subtract_large_numbers(self) -> None:
         """
         Test that subtracting very large numbers does not cause underflow.
         """
@@ -117,7 +117,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(1e100, 1)
         self.assertEqual(result, 1e100 - 1)
 
-    def test_subtract_small_numbers(self):
+    def test_subtract_small_numbers(self) -> None:
         """
         Test that subtracting very small numbers does not lose precision.
         """
@@ -125,7 +125,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.subtract(1e-100, 1e-100)
         self.assertEqual(result, 0)
 
-    def test_multiply_positive(self):
+    def test_multiply_positive(self) -> None:
         """
         Test that the multiply method returns the product of two positive numbers.
         """
@@ -133,7 +133,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(2.01, 4)
         self.assertEqual(result, 8.04)
 
-    def test_multiply_negative(self):
+    def test_multiply_negative(self) -> None:
         """
         Test that the multiply method returns the product of two negative numbers.
         """
@@ -141,7 +141,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(-5.3, -2.0)
         self.assertEqual(result, 10.60)
 
-    def test_multiply_mixed(self):
+    def test_multiply_mixed(self) -> None:
         """
         Test that the multiply method returns the product of a positive and a negative number.
         """
@@ -149,7 +149,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(5.5, -3)
         self.assertEqual(result, -16.50)
 
-    def test_multiply_zero(self):
+    def test_multiply_zero(self) -> None:
         """
         Test that multiplying any number by zero returns zero.
         """
@@ -160,7 +160,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(0, 50)
         self.assertEqual(result, 0)
 
-    def test_multiply_large_numbers(self):
+    def test_multiply_large_numbers(self) -> None:
         """
         Test that multiplying very large numbers does not cause overflow.
         """
@@ -168,7 +168,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(1e100, 1e10)
         self.assertEqual(result, 1e110)
 
-    def test_multiply_small_numbers(self):
+    def test_multiply_small_numbers(self) -> None:
         """
         Test that multiplying very small numbers does not lose precision.
         """
@@ -176,7 +176,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.multiply(1e-100, 1e-100)
         self.assertEqual(result, 1e-200)
 
-    def test_divide_positive(self):
+    def test_divide_positive(self) -> None:
         """
         Test that the divide method returns the quotient of two positive numbers.
         """
@@ -184,7 +184,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.divide(120, 3)
         self.assertEqual(result, 40)
 
-    def test_divide_negative(self):
+    def test_divide_negative(self) -> None:
         """
         Test that the divide method returns the quotient of two negative numbers.
         """
@@ -192,7 +192,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.divide(-1.2, -3)
         self.assertAlmostEqual(result, 0.4, places=5)
 
-    def test_divide_mixed(self):
+    def test_divide_mixed(self) -> None:
         """
         Test that the divide method returns the quotient of a positive and a negative number.
         """
@@ -200,7 +200,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.divide(1.2, -3)
         self.assertAlmostEqual(result, -0.4, places=5)
 
-    def test_divide_by_zero(self):
+    def test_divide_by_zero(self) -> None:
         """
         Test that dividing by zero raises a CalculatorError.
         """
@@ -210,7 +210,7 @@ class TestCalculator(unittest.TestCase):
         with self.assertRaises(ZeroDivisionError):
             calculator.divide(0, 0)
 
-    def test_divide_large_numbers(self):
+    def test_divide_large_numbers(self) -> None:
         """
         Test that dividing very large numbers does not cause underflow.
         """
@@ -218,7 +218,7 @@ class TestCalculator(unittest.TestCase):
         result = calculator.divide(1e100, 1e10)
         self.assertEqual(result, 1e90)
 
-    def test_divide_small_numbers(self):
+    def test_divide_small_numbers(self) -> None:
         """
         Test that dividing very small numbers does not lose precision.
         """

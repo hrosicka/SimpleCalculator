@@ -13,6 +13,16 @@ from config import (
     NUMBER_RANGE_MIN,
     WINDOW_TITLE,
 )
+
+from styles import (
+    get_button_style,
+    get_window_style,
+    get_label_style,
+    get_textbox_style,
+    get_textbox_error_style,
+    get_history_style,
+)
+
 from PyQt5 import QtCore
 from PyQt5.QtGui import QDoubleValidator, QFont, QIcon, QPixmap
 
@@ -37,20 +47,21 @@ locale: QtCore.QLocale = QtCore.QLocale(
 
 
 class MainWindow(QWidget):
-    BUTTON_STYLE: str = f"""QPushButton {{
-        background-color: {COLORS["primary"]}; 
-        color: white; 
-        border-radius: 10px; 
-        padding: 10px 15px; 
-        margin-top: 0px; 
-        outline: 0px;
-        min-width: 100px;
-    }}
-    QPushButton:hover {{
-        background-color: {COLORS["accent"]}; 
-    }}"""
+    """
+    Main window class for the PyQt Calculator application.
+
+    Provides a graphical interface for performing basic arithmetic operations
+    with history tracking and file export capabilities.
+    """
+
+    BUTTON_STYLE: str = get_button_style()
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """
+        Initialize the MainWindow.
+
+        Sets up the UI components, layout, styling, and event connections.
+        """
         super().__init__(*args, **kwargs)
 
         # relative paths
@@ -62,12 +73,7 @@ class MainWindow(QWidget):
         # Set window title and icon
         self.setWindowTitle(WINDOW_TITLE)
         self.setWindowIcon(QIcon(calc_icon))
-        self.setStyleSheet(f"""QWidget{{background-color: {COLORS["background"]};}}
-                            QToolTip {{ 
-                            border: 1px solid darkgrey;
-                            background-color: {COLORS["primary"]};
-                            border-radius: 10px; 
-                            color: white; }}""")
+        self.setStyleSheet(get_window_style())
 
         self.calculator: Calculator = Calculator()
 
@@ -77,12 +83,7 @@ class MainWindow(QWidget):
 
         self.label: QLabel = QLabel(INITIAL_RESULT)
         self.label.setFont(QFont("Arial", 14))
-        self.label.setStyleSheet(f"""background-color : white; 
-                                 color: {COLORS["text"]}; 
-                                 border-radius: 10px; 
-                                 border: 1px solid {COLORS["accent"]};
-                                 min-height: 40px;
-                                 """)
+        self.label.setStyleSheet(get_label_style())
 
         self.label.setAlignment(QtCore.Qt.AlignRight)
 
@@ -107,12 +108,7 @@ class MainWindow(QWidget):
         self.textbox1.setFont(QFont("Arial", 12))
         self.textbox1.setValidator(validator)
         self.textbox1.setAlignment(QtCore.Qt.AlignRight)
-        self.textbox1.setStyleSheet(f"""background-color : white; 
-                                    color: {COLORS["text"]}; 
-                                    border-radius: 10px; 
-                                    border: 1px solid {COLORS["accent"]};
-                                    min-height: 40px;
-                                    """)
+        self.textbox1.setStyleSheet(get_textbox_style())
         self.layout.addRow("Number 1:", self.textbox1)
 
         self.textbox2: QLineEdit = QLineEdit(self)
@@ -120,22 +116,12 @@ class MainWindow(QWidget):
         self.textbox2.setFont(QFont("Arial", 12))
         self.textbox2.setValidator(validator)
         self.textbox2.setAlignment(QtCore.Qt.AlignRight)
-        self.textbox2.setStyleSheet(f"""background-color : white; 
-                                    color: {COLORS["text"]}; 
-                                    border-radius: 10px; 
-                                    border: 1px solid {COLORS["accent"]};
-                                    min-height: 40px;
-                                    """)
+        self.textbox2.setStyleSheet(get_textbox_style())
         self.layout.addRow("Number 2:", self.textbox2)
 
         # Create a text box for displaying calculation history
         self.history: QTextEdit = QTextEdit()
-        self.history.setStyleSheet(f"""background-color : white;
-                                   color: {COLORS["text"]};
-                                   border-radius: 10px;
-                                   border: 1px solid {COLORS["accent"]};
-                                   min-height: 40px;
-                                   """)
+        self.history.setStyleSheet(get_history_style())
         self.layout.addRow("History:", self.history)
 
         # Create a grid layout for arranging buttons
@@ -157,18 +143,7 @@ class MainWindow(QWidget):
 
         # Set stylesheet for buttons (background color and text color)
         for button in buttons:
-            button.setStyleSheet(f"""QPushButton {{
-                                 background-color: {COLORS["primary"]}; 
-                                 color: white; 
-                                 border-radius: 10px; 
-                                 padding: 10px 15px; 
-                                 margin-top: 0px; 
-                                 outline: 0px;
-                                 }}
-                                 QPushButton:hover {{
-                                 background-color: {COLORS["accent"]};
-                                 }}
-                                 """)
+            button.setStyleSheet(get_button_style())
 
         # Set tooltips and functionality for each button:
         # Sum button calculates the sum and updates display and history
@@ -217,10 +192,17 @@ class MainWindow(QWidget):
 
     def save_history(self) -> None:
         """
-        Saves the calculator history to a text file with a dialog for selecting location and name.
+        Save the calculator history to a text file.
 
-        Checks if the history is empty and displays a message box if so.
-        Handles file write errors, permissions, and encoding issues.
+        Opens a file dialog for selecting location and filename.
+        Checks if history is empty and handles file write errors,
+        permissions, and encoding issues.
+
+        Raises:
+            PermissionError: If the user doesn't have write permissions.
+            FileNotFoundError: If the selected directory doesn't exist.
+            OSError: For other system-level file errors.
+            UnicodeEncodeError: If encoding issues occur.
         """
         dirname: str = os.path.dirname(__file__)
         warning: str = os.path.join(dirname, "warning.png")
@@ -321,13 +303,14 @@ class MainWindow(QWidget):
         icon_path: str,
     ) -> None:
         """
-        Helper method to display styled message boxes.
+        Display a styled message box to the user.
 
         Args:
-            message_type: Type of message (QMessageBox.Warning, Information, Critical)
-            title: Title of the message box
-            message: Message text
-            icon_path: Path to the icon image
+            message_type: The type of message box (QMessageBox.Warning,
+                         QMessageBox.Information, QMessageBox.Critical).
+            title: The title of the message box dialog.
+            message: The message text to display.
+            icon_path: Path to the icon image file to display.
         """
         messagebox: QMessageBox = QMessageBox(
             message_type, title, message, buttons=QMessageBox.Ok, parent=self
@@ -341,22 +324,37 @@ class MainWindow(QWidget):
         messagebox.exec_()
 
     def clear_history(self) -> None:
+        """
+        Clear all history from the history text box.
+
+        Removes all entries from the calculation history display.
+        """
         self.history.clear()
 
     def clear_input(self) -> None:
+        """
+        Clear all input fields.
+
+        Resets the result display to initial value and clears both
+        number input fields.
+        """
         self.label.setText(INITIAL_RESULT)
         self.textbox1.clear()
         self.textbox2.clear()
 
     def calculate(self, operation: str) -> None:
         """
-        Performs the calculation based on the operation and updates the display and history.
+        Perform a calculation based on the specified operation.
+
+        Updates the result display and adds the calculation to history.
+        Handles input validation and error cases appropriately.
 
         Args:
-            operation: The type of calculation to perform (e.g., "sum", "diff", "prod", "quot").
+            operation: The type of calculation to perform:
+                      "sum", "diff", "prod", or "quot".
 
         Raises:
-            ValueError: If no input is provided.
+            ValueError: If the input cannot be converted to a number.
             ZeroDivisionError: If division by zero is attempted.
         """
 
@@ -366,18 +364,8 @@ class MainWindow(QWidget):
         try:
             a: float = float(self.textbox1.text())
             b: float = float(self.textbox2.text())
-            self.textbox1.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS["text"]}; 
-                                        border-radius: 10px; 
-                                        border: 1px solid {COLORS["accent"]};
-                                        min-height: 40px;
-                                        """)
-            self.textbox2.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS["text"]}; 
-                                        border-radius: 10px; 
-                                        border: 1px solid {COLORS["accent"]};
-                                        min-height: 40px;
-                                        """)
+            self.textbox1.setStyleSheet(get_textbox_style())
+            self.textbox2.setStyleSheet(get_textbox_style())
 
             res: float | int
             ope: str
@@ -408,18 +396,8 @@ class MainWindow(QWidget):
             )
 
         except ValueError:
-            self.textbox1.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS["text"]}; 
-                                        border-radius: 10px; 
-                                        border: 4px solid {COLORS["error"]};
-                                        min-height: 40px;
-                                 """)
-            self.textbox2.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS["text"]}; 
-                                        border-radius: 10px; 
-                                        border: 4px solid {COLORS["error"]};
-                                        min-height: 40px;
-                                        """)
+            self.textbox1.setStyleSheet(get_textbox_error_style())
+            self.textbox2.setStyleSheet(get_textbox_error_style())
             messagebox: QMessageBox = QMessageBox(
                 QMessageBox.Information,
                 "Error",
@@ -436,12 +414,7 @@ class MainWindow(QWidget):
             messagebox.exec_()
 
         except ZeroDivisionError:
-            self.textbox2.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS['text']}; 
-                                        border-radius: 10px; 
-                                        border: 4px solid {COLORS['error']};
-                                        min-height: 40px;
-                                 """)
+            self.textbox2.setStyleSheet(get_textbox_error_style())
             messagebox: QMessageBox = QMessageBox(
                 QMessageBox.Warning,
                 "Error",

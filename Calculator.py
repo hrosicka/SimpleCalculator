@@ -1,16 +1,22 @@
+from typing import Union
+
+# Typový alias akceptující int i float (v Pythonu 3.10+ lze zapsat jako: Number = int | float)
+Number = Union[int, float]
+
+
 class Calculator:
     """
     This class solves basic mathematical operations:
     addition, subtraction, multiplication, and division.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         This is the constructor for the Calculator class. It does not require any arguments.
         """
         pass
 
-    def add(self, a, b):
+    def add(self, a: Number, b: Number) -> Number:
         """
         This method adds two numbers and returns the sum of numbers.
 
@@ -23,7 +29,7 @@ class Calculator:
         """
         return a + b
 
-    def subtract(self, a, b):
+    def subtract(self, a: Number, b: Number) -> Number:
         """
         This method subtracts two numbers and returns the difference of numbers.
 
@@ -36,7 +42,7 @@ class Calculator:
         """
         return a - b
 
-    def multiply(self, a, b):
+    def multiply(self, a: Number, b: Number) -> Number:
         """
         This method multiplies two numbers and returns the product of numbers.
 
@@ -49,7 +55,7 @@ class Calculator:
         """
         return a * b
 
-    def divide(self, a, b):
+    def divide(self, a: Number, b: Number) -> float:
         """
         This method divides two numbers and returns the quotient of numbers.
 

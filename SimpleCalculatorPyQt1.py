@@ -1,47 +1,23 @@
-import sys
 import os
-from config import (
-    COLORS,
-    WINDOW_TITLE,
-    DEFAULT_PRECISION,
-    NUMBER_RANGE_MIN,
-    NUMBER_RANGE_MAX,
-    INITIAL_RESULT,
-    MAX_HISTORY_SIZE,
-)
-
-# PyQt5 imports for building the graphical user interface (GUI)
-from PyQt5.QtWidgets import (
-    QApplication,
-    QFileDialog,
-    QFormLayout,
-    QGridLayout,
-    QLabel,
-    QLineEdit,
-    QMessageBox,
-    QPushButton,
-    QTextEdit,
-    QWidget,
-)
-
-from PyQt5.QtGui import (
-    QFont,
-    QDoubleValidator,
-    QIcon,
-    QPixmap,
-)
-
-from PyQt5 import QtCore
+import sys
 
 # Import the Calculator class from a separate module (Calculator.py)
 from Calculator import Calculator
+from config import (COLORS, DEFAULT_PRECISION, INITIAL_RESULT,
+                    MAX_HISTORY_SIZE, NUMBER_RANGE_MAX, NUMBER_RANGE_MIN,
+                    WINDOW_TITLE)
+from PyQt5 import QtCore
+from PyQt5.QtGui import QDoubleValidator, QFont, QIcon, QPixmap
+# PyQt5 imports for building the graphical user interface (GUI)
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QFormLayout,
+                             QGridLayout, QLabel, QLineEdit, QMessageBox,
+                             QPushButton, QTextEdit, QWidget)
 
 # Set the locale to US English for formatting
 locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
 
 
 class MainWindow(QWidget):
-
     BUTTON_STYLE = f"""QPushButton {{
         background-color: {COLORS["primary"]}; 
         color: white; 
@@ -67,10 +43,10 @@ class MainWindow(QWidget):
         # Set window title and icon
         self.setWindowTitle(WINDOW_TITLE)
         self.setWindowIcon(QIcon(calc_icon))
-        self.setStyleSheet(f"""QWidget{{background-color: {COLORS['background']};}}
+        self.setStyleSheet(f"""QWidget{{background-color: {COLORS["background"]};}}
                             QToolTip {{ 
                             border: 1px solid darkgrey;
-                            background-color: {COLORS['primary']};
+                            background-color: {COLORS["primary"]};
                             border-radius: 10px; 
                             color: white; }}""")
 
@@ -83,9 +59,9 @@ class MainWindow(QWidget):
         self.label = QLabel(INITIAL_RESULT)
         self.label.setFont(QFont("Arial", 14))
         self.label.setStyleSheet(f"""background-color : white; 
-                                 color: {COLORS['text']}; 
+                                 color: {COLORS["text"]}; 
                                  border-radius: 10px; 
-                                 border: 1px solid {COLORS['accent']};
+                                 border: 1px solid {COLORS["accent"]};
                                  min-height: 40px;
                                  """)
 
@@ -111,9 +87,9 @@ class MainWindow(QWidget):
         self.textbox1.setValidator(validator)
         self.textbox1.setAlignment(QtCore.Qt.AlignRight)
         self.textbox1.setStyleSheet(f"""background-color : white; 
-                                    color: {COLORS['text']}; 
+                                    color: {COLORS["text"]}; 
                                     border-radius: 10px; 
-                                    border: 1px solid {COLORS['accent']};
+                                    border: 1px solid {COLORS["accent"]};
                                     min-height: 40px;
                                     """)
         self.layout.addRow("Number 1:", self.textbox1)
@@ -124,9 +100,9 @@ class MainWindow(QWidget):
         self.textbox2.setValidator(validator)
         self.textbox2.setAlignment(QtCore.Qt.AlignRight)
         self.textbox2.setStyleSheet(f"""background-color : white; 
-                                    color: {COLORS['text']}; 
+                                    color: {COLORS["text"]}; 
                                     border-radius: 10px; 
-                                    border: 1px solid {COLORS['accent']};
+                                    border: 1px solid {COLORS["accent"]};
                                     min-height: 40px;
                                     """)
         self.layout.addRow("Number 2:", self.textbox2)
@@ -134,9 +110,9 @@ class MainWindow(QWidget):
         # Create a text box for displaying calculation history
         self.history = QTextEdit()
         self.history.setStyleSheet(f"""background-color : white;
-                                   color: {COLORS['text']};
+                                   color: {COLORS["text"]};
                                    border-radius: 10px;
-                                   border: 1px solid {COLORS['accent']};
+                                   border: 1px solid {COLORS["accent"]};
                                    min-height: 40px;
                                    """)
         self.layout.addRow("History:", self.history)
@@ -161,7 +137,7 @@ class MainWindow(QWidget):
         # Set stylesheet for buttons (background color and text color)
         for button in buttons:
             button.setStyleSheet(f"""QPushButton {{
-                                 background-color: {COLORS['primary']}; 
+                                 background-color: {COLORS["primary"]}; 
                                  color: white; 
                                  border-radius: 10px; 
                                  padding: 10px 15px; 
@@ -169,7 +145,7 @@ class MainWindow(QWidget):
                                  outline: 0px;
                                  }}
                                  QPushButton:hover {{
-                                 background-color: {COLORS['accent']};
+                                 background-color: {COLORS["accent"]};
                                  }}
                                  """)
 
@@ -358,15 +334,15 @@ class MainWindow(QWidget):
             a = float(self.textbox1.text())
             b = float(self.textbox2.text())
             self.textbox1.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS['text']}; 
+                                        color: {COLORS["text"]}; 
                                         border-radius: 10px; 
-                                        border: 1px solid {COLORS['accent']};
+                                        border: 1px solid {COLORS["accent"]};
                                         min-height: 40px;
                                         """)
             self.textbox2.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS['text']}; 
+                                        color: {COLORS["text"]}; 
                                         border-radius: 10px; 
-                                        border: 1px solid {COLORS['accent']};
+                                        border: 1px solid {COLORS["accent"]};
                                         min-height: 40px;
                                         """)
 
@@ -398,15 +374,15 @@ class MainWindow(QWidget):
 
         except ValueError:
             self.textbox1.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS['text']}; 
+                                        color: {COLORS["text"]}; 
                                         border-radius: 10px; 
-                                        border: 4px solid {COLORS['error']};
+                                        border: 4px solid {COLORS["error"]};
                                         min-height: 40px;
                                  """)
             self.textbox2.setStyleSheet(f"""background-color : white; 
-                                        color: {COLORS['text']}; 
+                                        color: {COLORS["text"]}; 
                                         border-radius: 10px; 
-                                        border: 4px solid {COLORS['error']};
+                                        border: 4px solid {COLORS["error"]};
                                         min-height: 40px;
                                         """)
             messagebox = QMessageBox(

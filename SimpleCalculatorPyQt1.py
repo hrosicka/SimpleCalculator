@@ -1,24 +1,43 @@
 import os
 import sys
+from typing import Any, List, Tuple
 
 # Import the Calculator class from a separate module (Calculator.py)
 from Calculator import Calculator
-from config import (COLORS, DEFAULT_PRECISION, INITIAL_RESULT,
-                    MAX_HISTORY_SIZE, NUMBER_RANGE_MAX, NUMBER_RANGE_MIN,
-                    WINDOW_TITLE)
+from config import (
+    COLORS,
+    DEFAULT_PRECISION,
+    INITIAL_RESULT,
+    MAX_HISTORY_SIZE,
+    NUMBER_RANGE_MAX,
+    NUMBER_RANGE_MIN,
+    WINDOW_TITLE,
+)
 from PyQt5 import QtCore
 from PyQt5.QtGui import QDoubleValidator, QFont, QIcon, QPixmap
+
 # PyQt5 imports for building the graphical user interface (GUI)
-from PyQt5.QtWidgets import (QApplication, QFileDialog, QFormLayout,
-                             QGridLayout, QLabel, QLineEdit, QMessageBox,
-                             QPushButton, QTextEdit, QWidget)
+from PyQt5.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QFormLayout,
+    QGridLayout,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QTextEdit,
+    QWidget,
+)
 
 # Set the locale to US English for formatting
-locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
+locale: QtCore.QLocale = QtCore.QLocale(
+    QtCore.QLocale.English, QtCore.QLocale.UnitedStates
+)
 
 
 class MainWindow(QWidget):
-    BUTTON_STYLE = f"""QPushButton {{
+    BUTTON_STYLE: str = f"""QPushButton {{
         background-color: {COLORS["primary"]}; 
         color: white; 
         border-radius: 10px; 
@@ -31,14 +50,14 @@ class MainWindow(QWidget):
         background-color: {COLORS["accent"]}; 
     }}"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         # relative paths
-        dirname = os.path.dirname(__file__)
+        dirname: str = os.path.dirname(__file__)
 
         # Define paths for icon used in the application
-        calc_icon = os.path.join(dirname, "calc_icon.png")
+        calc_icon: str = os.path.join(dirname, "calc_icon.png")
 
         # Set window title and icon
         self.setWindowTitle(WINDOW_TITLE)
@@ -50,13 +69,13 @@ class MainWindow(QWidget):
                             border-radius: 10px; 
                             color: white; }}""")
 
-        self.calculator = Calculator()
+        self.calculator: Calculator = Calculator()
 
         # create a layout
-        self.layout = QFormLayout()
+        self.layout: QFormLayout = QFormLayout()
         self.setLayout(self.layout)
 
-        self.label = QLabel(INITIAL_RESULT)
+        self.label: QLabel = QLabel(INITIAL_RESULT)
         self.label.setFont(QFont("Arial", 14))
         self.label.setStyleSheet(f"""background-color : white; 
                                  color: {COLORS["text"]}; 
@@ -70,18 +89,20 @@ class MainWindow(QWidget):
         self.layout.addRow("Result:", self.label)
 
         # Create a validator to restrict input to numbers within a range
-        validator = QDoubleValidator(
+        validator: QDoubleValidator = QDoubleValidator(
             NUMBER_RANGE_MIN, NUMBER_RANGE_MAX, DEFAULT_PRECISION
         )
 
         # Set the validator's locale and notation for proper formatting
-        locale = QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
+        locale: QtCore.QLocale = QtCore.QLocale(
+            QtCore.QLocale.English, QtCore.QLocale.UnitedStates
+        )
 
         validator.setLocale(locale)
         validator.setNotation(QDoubleValidator.StandardNotation)
 
         # Create text boxes for entering numbers
-        self.textbox1 = QLineEdit(self)
+        self.textbox1: QLineEdit = QLineEdit(self)
         self.textbox1.setToolTip("<b>Please, enter Number 1!</b>")
         self.textbox1.setFont(QFont("Arial", 12))
         self.textbox1.setValidator(validator)
@@ -94,7 +115,7 @@ class MainWindow(QWidget):
                                     """)
         self.layout.addRow("Number 1:", self.textbox1)
 
-        self.textbox2 = QLineEdit(self)
+        self.textbox2: QLineEdit = QLineEdit(self)
         self.textbox2.setToolTip("<b>Please, enter Number 2!</b>")
         self.textbox2.setFont(QFont("Arial", 12))
         self.textbox2.setValidator(validator)
@@ -108,7 +129,7 @@ class MainWindow(QWidget):
         self.layout.addRow("Number 2:", self.textbox2)
 
         # Create a text box for displaying calculation history
-        self.history = QTextEdit()
+        self.history: QTextEdit = QTextEdit()
         self.history.setStyleSheet(f"""background-color : white;
                                    color: {COLORS["text"]};
                                    border-radius: 10px;
@@ -118,11 +139,11 @@ class MainWindow(QWidget):
         self.layout.addRow("History:", self.history)
 
         # Create a grid layout for arranging buttons
-        self.layout_button = QGridLayout()
+        self.layout_button: QGridLayout = QGridLayout()
         self.layout.addRow(self.layout_button)
 
         # Define button titles and create buttons
-        titles = [
+        titles: List[str] = [
             "Sum",
             "Difference",
             "Product",
@@ -132,7 +153,7 @@ class MainWindow(QWidget):
             "History Clear",
             "Exit",
         ]
-        buttons = [QPushButton(title) for title in titles]
+        buttons: List[QPushButton] = [QPushButton(title) for title in titles]
 
         # Set stylesheet for buttons (background color and text color)
         for button in buttons:
@@ -194,17 +215,17 @@ class MainWindow(QWidget):
 
         self.show()
 
-    def save_history(self):
+    def save_history(self) -> None:
         """
         Saves the calculator history to a text file with a dialog for selecting location and name.
 
         Checks if the history is empty and displays a message box if so.
         Handles file write errors, permissions, and encoding issues.
         """
-        dirname = os.path.dirname(__file__)
-        warning = os.path.join(dirname, "warning.png")
-        info = os.path.join(dirname, "info.png")
-        error = os.path.join(dirname, "stop_writing.png")
+        dirname: str = os.path.dirname(__file__)
+        warning: str = os.path.join(dirname, "warning.png")
+        info: str = os.path.join(dirname, "info.png")
+        error: str = os.path.join(dirname, "stop_writing.png")
 
         # Check if history is empty
         if not self.history.toPlainText():
@@ -217,6 +238,8 @@ class MainWindow(QWidget):
             return
 
         # Get the selected file path
+        filepath: str
+        _: str
         filepath, _ = QFileDialog.getSaveFileName(
             self, "Save File", "", "Text files (*.txt)"
         )
@@ -226,7 +249,7 @@ class MainWindow(QWidget):
             return  # User cancelled the dialog
 
         try:
-            history_text = self.history.toPlainText()
+            history_text: str = self.history.toPlainText()
 
             # Check if history is not too large (limit to MAX_HISTORY_SIZE)
             if len(history_text.encode("utf-8")) > MAX_HISTORY_SIZE:
@@ -290,7 +313,13 @@ class MainWindow(QWidget):
                 error,
             )
 
-    def _show_message_box(self, message_type, title, message, icon_path):
+    def _show_message_box(
+        self,
+        message_type: QMessageBox.Icon,
+        title: str,
+        message: str,
+        icon_path: str,
+    ) -> None:
         """
         Helper method to display styled message boxes.
 
@@ -300,22 +329,26 @@ class MainWindow(QWidget):
             message: Message text
             icon_path: Path to the icon image
         """
-        messagebox = QMessageBox(
+        messagebox: QMessageBox = QMessageBox(
             message_type, title, message, buttons=QMessageBox.Ok, parent=self
         )
         messagebox.setIconPixmap(QPixmap(icon_path))
-        messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
+
+        ok_button: QPushButton | None = messagebox.findChild(QPushButton)
+        if ok_button:
+            ok_button.setStyleSheet(self.BUTTON_STYLE)
+
         messagebox.exec_()
 
-    def clear_history(self):
+    def clear_history(self) -> None:
         self.history.clear()
 
-    def clear_input(self):
+    def clear_input(self) -> None:
         self.label.setText(INITIAL_RESULT)
         self.textbox1.clear()
         self.textbox2.clear()
 
-    def calculate(self, operation):
+    def calculate(self, operation: str) -> None:
         """
         Performs the calculation based on the operation and updates the display and history.
 
@@ -327,12 +360,12 @@ class MainWindow(QWidget):
             ZeroDivisionError: If division by zero is attempted.
         """
 
-        dirname = os.path.dirname(__file__)
-        stop_writing = os.path.join(dirname, "stop_writing.png")
+        dirname: str = os.path.dirname(__file__)
+        stop_writing: str = os.path.join(dirname, "stop_writing.png")
 
         try:
-            a = float(self.textbox1.text())
-            b = float(self.textbox2.text())
+            a: float = float(self.textbox1.text())
+            b: float = float(self.textbox2.text())
             self.textbox1.setStyleSheet(f"""background-color : white; 
                                         color: {COLORS["text"]}; 
                                         border-radius: 10px; 
@@ -346,6 +379,8 @@ class MainWindow(QWidget):
                                         min-height: 40px;
                                         """)
 
+            res: float | int
+            ope: str
             if operation == "sum":
                 res = self.calculator.add(a, b)
                 ope = " + "
@@ -385,7 +420,7 @@ class MainWindow(QWidget):
                                         border: 4px solid {COLORS["error"]};
                                         min-height: 40px;
                                         """)
-            messagebox = QMessageBox(
+            messagebox: QMessageBox = QMessageBox(
                 QMessageBox.Information,
                 "Error",
                 "Input can only be a number!",
@@ -393,17 +428,21 @@ class MainWindow(QWidget):
                 parent=self,
             )
             messagebox.setIconPixmap(QPixmap(stop_writing))
-            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
+
+            ok_button: QPushButton | None = messagebox.findChild(QPushButton)
+            if ok_button:
+                ok_button.setStyleSheet(self.BUTTON_STYLE)
+
             messagebox.exec_()
 
         except ZeroDivisionError:
-            self.textbox2.setStyleSheet("""background-color : white; 
+            self.textbox2.setStyleSheet(f"""background-color : white; 
                                         color: {COLORS['text']}; 
                                         border-radius: 10px; 
                                         border: 4px solid {COLORS['error']};
                                         min-height: 40px;
                                  """)
-            messagebox = QMessageBox(
+            messagebox: QMessageBox = QMessageBox(
                 QMessageBox.Warning,
                 "Error",
                 "Division by zero is not allowed!",
@@ -411,11 +450,15 @@ class MainWindow(QWidget):
                 parent=self,
             )
             messagebox.setIconPixmap(QPixmap(stop_writing))
-            messagebox.findChild(QPushButton).setStyleSheet(self.BUTTON_STYLE)
+
+            ok_button: QPushButton | None = messagebox.findChild(QPushButton)
+            if ok_button:
+                ok_button.setStyleSheet(self.BUTTON_STYLE)
+
             messagebox.exec_()
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
+    app: QApplication = QApplication(sys.argv)
+    window: MainWindow = MainWindow()
     sys.exit(app.exec())

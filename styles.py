@@ -5,7 +5,6 @@ This module centralizes all CSS/QSS stylesheets used throughout the application,
 making it easy to maintain, update, and switch between themes.
 """
 
-from typing import Dict
 from config import COLORS
 
 
@@ -45,10 +44,10 @@ def get_window_style() -> str:
         >>> window = QWidget()
         >>> window.setStyleSheet(get_window_style())
     """
-    return f"""QWidget{{background-color: {COLORS['background']};}}
+    return f"""QWidget{{background-color: {COLORS["background"]};}}
     QToolTip {{ 
     border: 1px solid darkgrey;
-    background-color: {COLORS['primary']};
+    background-color: {COLORS["primary"]};
     border-radius: 10px; 
     color: white; }}"""
 
@@ -65,9 +64,9 @@ def get_label_style() -> str:
         >>> label.setStyleSheet(get_label_style())
     """
     return f"""background-color : white; 
-    color: {COLORS['text']}; 
+    color: {COLORS["text"]}; 
     border-radius: 10px; 
-    border: 1px solid {COLORS['accent']};
+    border: 1px solid {COLORS["accent"]};
     min-height: 40px;"""
 
 
@@ -83,9 +82,9 @@ def get_textbox_style() -> str:
         >>> textbox.setStyleSheet(get_textbox_style())
     """
     return f"""background-color : white; 
-    color: {COLORS['text']}; 
+    color: {COLORS["text"]}; 
     border-radius: 10px; 
-    border: 1px solid {COLORS['accent']};
+    border: 1px solid {COLORS["accent"]};
     min-height: 40px;"""
 
 
@@ -103,9 +102,9 @@ def get_textbox_error_style() -> str:
         >>> textbox.setStyleSheet(get_textbox_error_style())
     """
     return f"""background-color : white; 
-    color: {COLORS['text']}; 
+    color: {COLORS["text"]}; 
     border-radius: 10px; 
-    border: 4px solid {COLORS['error']};
+    border: 4px solid {COLORS["error"]};
     min-height: 40px;"""
 
 
@@ -121,7 +120,7 @@ def get_history_style() -> str:
         >>> history.setStyleSheet(get_history_style())
     """
     return f"""background-color : white;
-    color: {COLORS['text']};
+    color: {COLORS["text"]};
     border-radius: 10px;
-    border: 1px solid {COLORS['accent']};
+    border: 1px solid {COLORS["accent"]};
     min-height: 40px;"""

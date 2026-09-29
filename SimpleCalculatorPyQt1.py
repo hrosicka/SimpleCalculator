@@ -1,32 +1,9 @@
 import os
 import sys
-from typing import Any, List, Tuple
-
-# Import the Calculator class from a separate module (Calculator.py)
-from Calculator import Calculator, CalculatorError
-from config import (
-    COLORS,
-    DEFAULT_PRECISION,
-    INITIAL_RESULT,
-    MAX_HISTORY_SIZE,
-    NUMBER_RANGE_MAX,
-    NUMBER_RANGE_MIN,
-    WINDOW_TITLE,
-)
-
-from styles import (
-    get_button_style,
-    get_window_style,
-    get_label_style,
-    get_textbox_style,
-    get_textbox_error_style,
-    get_history_style,
-)
+from typing import Any
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QDoubleValidator, QFont, QIcon, QPixmap
-
-# PyQt5 imports for building the graphical user interface (GUI)
 from PyQt5.QtWidgets import (
     QApplication,
     QFileDialog,
@@ -38,6 +15,24 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QTextEdit,
     QWidget,
+)
+
+from Calculator import Calculator, CalculatorError
+from config import (
+    DEFAULT_PRECISION,
+    INITIAL_RESULT,
+    MAX_HISTORY_SIZE,
+    NUMBER_RANGE_MAX,
+    NUMBER_RANGE_MIN,
+    WINDOW_TITLE,
+)
+from styles import (
+    get_button_style,
+    get_history_style,
+    get_label_style,
+    get_textbox_error_style,
+    get_textbox_style,
+    get_window_style,
 )
 
 # Set the locale to US English for formatting
@@ -129,7 +124,7 @@ class MainWindow(QWidget):
         self.layout.addRow(self.layout_button)
 
         # Define button titles and create buttons
-        titles: List[str] = [
+        titles: list[str] = [
             "Sum",
             "Difference",
             "Product",
@@ -139,7 +134,7 @@ class MainWindow(QWidget):
             "History Clear",
             "Exit",
         ]
-        buttons: List[QPushButton] = [QPushButton(title) for title in titles]
+        buttons: list[QPushButton] = [QPushButton(title) for title in titles]
 
         # Set stylesheet for buttons (background color and text color)
         for button in buttons:
@@ -275,7 +270,7 @@ class MainWindow(QWidget):
             self._show_message_box(
                 QMessageBox.Critical,
                 "Save History - Error",
-                f"System error while saving:\n{str(e)}\n\nTry again later.",
+                f"System error while saving:\n{e!s}\n\nTry again later.",
                 error,
             )
 
@@ -284,14 +279,6 @@ class MainWindow(QWidget):
                 QMessageBox.Critical,
                 "Save History - Error",
                 "Encoding error! Some characters cannot be saved.\n\nTry using a different filename.",
-                error,
-            )
-
-        except Exception as e:
-            self._show_message_box(
-                QMessageBox.Critical,
-                "Save History - Error",
-                f"Unexpected error:\n{str(e)}\n\nPlease try again.",
                 error,
             )
 

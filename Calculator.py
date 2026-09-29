@@ -1,7 +1,4 @@
-from typing import Union
-
-# Type alias accepting both int and float (in Python 3.10+ can be written as: Number = int | float)
-Number = Union[int, float]
+Number = int | float
 
 
 class Calculator:
@@ -14,7 +11,6 @@ class Calculator:
         """
         This is the constructor for the Calculator class. It does not require any arguments.
         """
-        pass
 
     def add(self, a: Number, b: Number) -> Number:
         """

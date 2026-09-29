@@ -1,6 +1,6 @@
 from typing import Union
 
-# Typový alias akceptující int i float (v Pythonu 3.10+ lze zapsat jako: Number = int | float)
+# Type alias accepting both int and float (in Python 3.10+ can be written as: Number = int | float)
 Number = Union[int, float]
 
 

@@ -5,7 +5,6 @@ This module centralizes all CSS/QSS stylesheets used throughout the application,
 making it easy to maintain, update, and switch between themes.
 """
 
-from typing import Dict
 from config import COLORS
 
 

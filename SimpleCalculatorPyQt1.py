@@ -282,7 +282,7 @@ class MainWindow(QWidget):
                 error,
             )
 
-        except (OSError, UnicodeEncodeError) as e:
+        except OSError as e:
             self._show_message_box(
                 QMessageBox.Critical,
                 "Save History - Error",

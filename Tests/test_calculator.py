@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from Calculator import Calculator
+from Calculator import Calculator, CalculatorError
 
 
 class TestCalculator(unittest.TestCase):
@@ -205,9 +205,9 @@ class TestCalculator(unittest.TestCase):
         Test that dividing by zero raises a CalculatorError.
         """
         calculator = Calculator()
-        with self.assertRaises(ZeroDivisionError):
+        with self.assertRaises(CalculatorError):
             calculator.divide(50, 0)
-        with self.assertRaises(ZeroDivisionError):
+        with self.assertRaises(CalculatorError):
             calculator.divide(0, 0)
 
     def test_divide_large_numbers(self) -> None:

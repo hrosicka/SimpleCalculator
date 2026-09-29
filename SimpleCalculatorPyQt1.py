@@ -3,7 +3,7 @@ import sys
 from typing import Any, List, Tuple
 
 # Import the Calculator class from a separate module (Calculator.py)
-from Calculator import Calculator
+from Calculator import Calculator, CalculatorError
 from config import (
     COLORS,
     DEFAULT_PRECISION,
@@ -413,7 +413,7 @@ class MainWindow(QWidget):
 
             messagebox.exec_()
 
-        except ZeroDivisionError:
+        except CalculatorError:
             self.textbox2.setStyleSheet(get_textbox_error_style())
             messagebox: QMessageBox = QMessageBox(
                 QMessageBox.Warning,

@@ -1,6 +1,6 @@
 from typing import Final
 
-# Konfigurace barev
+# Color configuration
 COLORS: Final[dict[str, str]] = {
     "primary": "#0B132B",
     "accent": "#7F2982",
@@ -9,7 +9,7 @@ COLORS: Final[dict[str, str]] = {
     "text": "#0B132B",
 }
 
-# Konstanty pro nastavení aplikace
+# Application setup constants
 WINDOW_TITLE: Final[str] = "PyQt Calculator"
 DEFAULT_PRECISION: Final[int] = 5
 NUMBER_RANGE_MIN: Final[int] = -10000000

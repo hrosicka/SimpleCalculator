@@ -70,9 +70,24 @@ class Calculator:
             float: The quotient of a and b.
         """
         if b == 0:
-            raise ZeroDivisionError("Division by zero")
+            raise CalculatorError("Division by zero")
         return a / b
 
 
 class CalculatorError(Exception):
-    pass
+    """
+    Custom exception raised by the Calculator class.
+
+    Used to signal calculation errors such as division by zero
+    or invalid operations.
+    """
+
+    def __init__(self, message: str = "A calculation error occurred") -> None:
+        """
+        Initialize the CalculatorError.
+
+        Args:
+            message: The error message to display.
+        """
+        self.message = message
+        super().__init__(self.message)

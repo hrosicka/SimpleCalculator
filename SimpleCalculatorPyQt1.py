@@ -282,14 +282,6 @@ class MainWindow(QWidget):
                 error,
             )
 
-        except OSError as e:
-            self._show_message_box(
-                QMessageBox.Critical,
-                "Save History - Error",
-                f"Unexpected error:\n{e!s}\n\nPlease try again.",
-                error,
-            )
-
     def _show_message_box(
         self,
         message_type: QMessageBox.Icon,
